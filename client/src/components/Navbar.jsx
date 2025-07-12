@@ -4,7 +4,7 @@ import {Menu, Search, ShoppingBag} from 'lucide-react'
 
 const Navbar = () => {
   return (
-    <div className='sticky top-0 z-50 w-full h-[50px] md:h-[80px] bg-white border-1'>
+    <div className='sticky top-0 z-50 w-full h-[50px] md:h-[80px] bg-white border'>
         <div className='flex justify-between items-center mt-2 mx-4 h-8 md:h-12 md:mt-4 md:mx-[40px] '>
         <div className='flex gap-2 lg:gap-8 items-center'>
             <div className='md:hidden'>
