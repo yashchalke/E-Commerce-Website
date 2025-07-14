@@ -6,6 +6,7 @@ import Logoslider from '../components/Logoslider'
 import NewArrivals from '../components/NewArrivals'
 import TopSelling from '../components/TopSelling'
 import BrowseByDressStyle from '../components/BrowseByDressStyle'
+import HappyCustomers from '../components/HappyCustomers'
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
         <div className='border lg:mx-10 mx-3'></div>
         <TopSelling />
         <BrowseByDressStyle />
+        <HappyCustomers />
     </section>
   )
 }
