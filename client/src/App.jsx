@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Blackbox from './components/Blackbox'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path='/' element={<Home />}/>
         <Route path='/cart' element={<Cart />}/>
       </Routes>
+    <Footer />
     </>
   )
 }
