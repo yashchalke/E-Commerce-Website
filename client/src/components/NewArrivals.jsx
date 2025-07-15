@@ -8,9 +8,27 @@ const NewArrivals = () => {
     const dummy = [
       {
         id:1,
-        productimage:"/assets/products/product-1.png",
+        productimage:products.product_1,
         Title:"T-Shirt with tape Details",
         Price:"$120"
+      },
+      {
+        id:2,
+        productimage:products.product_2,
+        Title:"Skinny Fit Jeans",
+        Price:"$140"
+      },
+      {
+        id:3,
+        productimage:products.product_3,
+        Title:"Checkered Shirt",
+        Price:"$180"
+      },
+      {
+        id:4,
+        productimage:products.product_4,
+        Title:"Sleeve Stripped T-shirt",
+        Price:"$130"
       }
     ];
   return (
