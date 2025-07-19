@@ -1,5 +1,6 @@
 import React from 'react'
 import { products } from '../assets/products/productimages'
+import ProductTabs from '../components/ProductTabs'
 
 const ProductDetails = () => {
   return (
@@ -59,6 +60,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <ProductTabs />
     </div>
   )
 }
