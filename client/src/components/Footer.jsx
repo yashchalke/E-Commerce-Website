@@ -77,5 +77,7 @@ const Footer = () => {
   )
 }
 
+{/* Issue in responsiveness of footer need to do something*/}
+
 
 export default Footer
