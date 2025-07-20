@@ -115,31 +115,34 @@ const Category = () => {
               
     ];
   return (
-    <div className=' px-10 py-10'>
-        <div className='grid grid-cols-[20%_80%] gap-4'>
-            <div className='border px-2 font-semibold flex items-center'>Filters</div>
+    <div className='md:px-10 md:py-10 px-4 py-2'>
+        <div className='md:grid md:grid-cols-[20%_80%] gap-4'>
+            <div className='hidden border px-2 font-semibold md:flex items-center'>Filters</div>
             <div className=''>
             <div className=' px-2 flex justify-between'>
-                <h1 className=' px-16 font-semibold text-2xl'>Casual</h1>
+                <h1 className=' md:px-16 font-semibold text-2xl'>Casual</h1>
                 <div className=' flex items-center gap-x-4'>
                     <p className='text-gray-500'>Showing 1-10 of 50 Products</p>
-                    <p>Sort by:Most Popular</p>
+                    <p className='hidden md:block'>Sort by:Most Popular</p>
                 </div>
             </div> 
-                <div className='px-17 py-4 flex flex-wrap gap-5'>
-                    {dummy.map((product) => (<ProductCard 
+                <div className='md:px-17 md:py-4 md:flex md:flex-wrap md:gap-5 flex flex-wrap gap-5 py-5'>
+                    {dummy.map((product) => (
+                    <div className="w-[160px] md:w-auto " key={product.id}>
+                        <ProductCard 
                     id = {product.id}
                     productimage = {product.productimage}
                     Title = {product.Title}
                     Price = {product.Price}
-                    />))}
+                    />
+                    </div>))}
                     
                 </div>
                 <div className=' border-gray-400'></div>
-                <div className='flex justify-between px-20 py-3 items-center'>
-                    <div className='border px-10 py-3 rounded'>Previous</div>
+                <div className=' flex justify-between md:px-20 md:py-3 items-center flex-wrap mb-10'>
+                    <div className='border md:px-10 md:py-3 rounded'>Previous</div>
                     <div>
-                        <li className='flex gap-x-10'>
+                        <li className='flex md:gap-x-10 gap-x-2'>
                             <ul>1</ul>
                             <ul>2</ul>
                             <ul>3</ul>
@@ -151,7 +154,7 @@ const Category = () => {
                             <ul>9</ul>
                         </li>
                     </div>
-                    <div className='border px-10 py-3 rounded'>Next</div>
+                    <div className='border md:px-10 md:py-3 rounded'>Next</div>
                 </div>
             </div>
         </div>
