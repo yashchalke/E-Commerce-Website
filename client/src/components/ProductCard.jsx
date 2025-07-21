@@ -9,8 +9,8 @@ const ProductCard = ({id,productimage,Title,Price}) => {
         <img src={productimage} />
         </div>
         <div className=' lg:mt-3 lg:h-12 '>
-            <h1 className='text-[13px]'>{Title}</h1>
-            <h1>{Price}</h1>
+            <h1 className='text-[11px] md:text-[13px]'>{Title}</h1>
+            <h1 className='text-[15px] md:text-[20px]'>{Price}</h1>
         </div>
     </div>
     </Link>

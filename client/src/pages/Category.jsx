@@ -140,7 +140,7 @@ const Category = () => {
                 </div>
                 <div className=' border-gray-400'></div>
                 <div className=' flex justify-between md:px-20 md:py-3 items-center flex-wrap mb-10'>
-                    <div className='border md:px-10 md:py-3 rounded'>Previous</div>
+                    <div className='border px-2 py-2 md:px-10 md:py-3 rounded'>Previous</div>
                     <div>
                         <li className='flex md:gap-x-10 gap-x-2'>
                             <ul>1</ul>
@@ -154,7 +154,7 @@ const Category = () => {
                             <ul>9</ul>
                         </li>
                     </div>
-                    <div className='border md:px-10 md:py-3 rounded'>Next</div>
+                    <div className='border px-2 py-2 md:px-10 md:py-3 rounded'>Next</div>
                 </div>
             </div>
         </div>
