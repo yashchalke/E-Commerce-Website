@@ -5,79 +5,116 @@ import {FaCcVisa,FaCcMastercard,FaPaypal,FaApplePay,FaGooglePay} from 'react-ico
 const Footer = () => {
   return (
     <footer>
-    <div className='relative lg:mt-20 mt-15 '>
-        <div className='absolute top-[-80px] lg:px-10 px-5 py-5 ml-4 w-82 rounded-2xl lg:min-w-330 lg:ml-24 lg:min-h-30 lg:top-[-60px] bg-gray-400'>
-            <div className='flex flex-col gap-y-3 lg:flex lg:justify-between lg:flex-row'>
-                <div className='text-white text-[13px] text-center lg:text-left lg:flex lg:items-center lg:font-extrabold lg:text-3xl'>
-                    STAY UPTO DATE ABOUT <br /> OUR LATEST OFFERS
-                </div>
-                <div className='flex flex-col gap-y-3'>
-                    <input className='border border-white h-10 px-4 bg-white rounded-3xl' placeholder='Enter your Email address'/>
-                    <button className='text-black bg-white py-2 lg:px-30 rounded-3xl'>subscribe to Newsletter</button>
-                </div>
+      <div className='relative mt-15 lg:mt-20'>
+        {/* Newsletter Subscription Section */}
+        <div className='absolute inset-x-4 lg:inset-x-16 -top-16 lg:-top-20 z-10'>
+          <div className='bg-black rounded-2xl p-6 lg:p-8'>
+            <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6'>
+              {/* Newsletter Text */}
+              <div className='text-white text-center lg:text-left'>
+                <h2 className='text-2xl lg:text-4xl font-bold leading-tight'>
+                  STAY UPTO DATE ABOUT
+                  <br className='hidden lg:block' />
+                  <span className='lg:inline block'> OUR LATEST OFFERS</span>
+                </h2>
+              </div>
+              
+              {/* Input Form */}
+              <div className='flex flex-col gap-3 w-full lg:w-auto lg:min-w-[350px]'>
+                <input 
+                  className='w-full px-4 py-3 bg-white rounded-full text-gray-600 placeholder-gray-400' 
+                  placeholder='Enter your Email address'
+                  type="email"
+                />
+                <button className='w-full px-6 py-3 text-black bg-white rounded-full font-medium hover:bg-gray-100 transition-colors'>
+                  Subscribe to Newsletter
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-        <div className='bg-gray-300 h-200 lg:h-90 py-30 px-4 lg:py-24 lg:px-24'>
-            <div className='min-h-40 lg:flex lg:justify-between'>
-                <div className='lg:w-60 px-3 py-3 lg:flex lg:flex-col gap-y-3'> {/*logo*/}
-                    <h1 className=' lg:text-3xl lg:font-extrabold'>SHOP.CO</h1>
-                    <p className='text-[13px]'>We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
-                    <div className='flex flex-row gap-x-3 lg:mt-2 mt-3'>
-                        <Twitter className='border w-10 h-10 p-2 rounded-3xl bg-white'/>
-                        <Facebook className='border w-10 h-10 p-2 rounded-3xl bg-white'/>
-                        <Instagram className='border w-10 h-10 p-2 rounded-3xl bg-white'/>
-                        <Github className='border w-10 h-10 p-2 rounded-3xl bg-white'/>
-                    </div>
+
+        {/* Main Footer Content */}
+        <div className='bg-gray-100 pt-24 lg:pt-28 pb-8 px-4 lg:px-16'>
+          {/* Footer Links Section */}
+          <div className='flex flex-col lg:flex-row lg:justify-between mb-8'>
+            {/* Company Info */}
+            <div className='mb-8 lg:mb-0 lg:max-w-xs mt-25 lg:mt-0'>
+              <h1 className='text-2xl lg:text-3xl font-extrabold mb-4'>SHOP.CO</h1>
+              <p className='text-sm text-gray-600 mb-6 leading-relaxed'>
+                We have clothes that suits your style and which you're proud to wear. From women to men.
+              </p>
+              <div className='flex gap-3'>
+                <Twitter className='w-10 h-10 p-2 bg-white border border-gray-200 rounded-full hover:bg-gray-50 cursor-pointer'/>
+                <Facebook className='w-10 h-10 p-2 bg-white border border-gray-200 rounded-full hover:bg-gray-50 cursor-pointer'/>
+                <Instagram className='w-10 h-10 p-2 bg-white border border-gray-200 rounded-full hover:bg-gray-50 cursor-pointer'/>
+                <Github className='w-10 h-10 p-2 bg-white border border-gray-200 rounded-full hover:bg-gray-50 cursor-pointer'/>
+              </div>
+            </div>
+
+            {/* Footer Links Grid */}
+            <div className='grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-16 flex-1 lg:max-w-3xl'>
+              <div className='space-y-4'>
+                <h3 className='font-bold text-sm'>COMPANY</h3>
+                <div className='space-y-3 text-sm text-gray-600'>
+                  <div className='hover:text-black cursor-pointer'>About</div>
+                  <div className='hover:text-black cursor-pointer'>Features</div>
+                  <div className='hover:text-black cursor-pointer'>Works</div>
+                  <div className='hover:text-black cursor-pointer'>Careers</div>
                 </div>
-            <div className='lg:flex lg:gap-x-30 lg:px-10 flex flex-wrap justify-between'>
-            <div className='flex flex-col gap-y-3 py-3 w-37'>
-                <div className='font-bold'>COMPANY</div>
-                <div>About</div>
-                <div>Features</div>
-                <div>Works</div>
-                <div>Careers</div>
+              </div>
+
+              <div className='space-y-4'>
+                <h3 className='font-bold text-sm'>HELP</h3>
+                <div className='space-y-3 text-sm text-gray-600'>
+                  <div className='hover:text-black cursor-pointer'>Customer Support</div>
+                  <div className='hover:text-black cursor-pointer'>Delivery Details</div>
+                  <div className='hover:text-black cursor-pointer'>Terms & Conditions</div>
+                  <div className='hover:text-black cursor-pointer'>Privacy Policy</div>
+                </div>
+              </div>
+
+              <div className='space-y-4'>
+                <h3 className='font-bold text-sm'>FAQ</h3>
+                <div className='space-y-3 text-sm text-gray-600'>
+                  <div className='hover:text-black cursor-pointer'>Account</div>
+                  <div className='hover:text-black cursor-pointer hidden lg:block'>Manage Deliveries</div>
+                  <div className='hover:text-black cursor-pointer'>Orders</div>
+                  <div className='hover:text-black cursor-pointer'>Payments</div>
+                </div>
+              </div>
+
+              <div className='space-y-4'>
+                <h3 className='font-bold text-sm'>RESOURCES</h3>
+                <div className='space-y-3 text-sm text-gray-600'>
+                  <div className='hover:text-black cursor-pointer'>Free eBook</div>
+                  <div className='hover:text-black cursor-pointer hidden lg:block'>Development Tutorial</div>
+                  <div className='hover:text-black cursor-pointer'>How-to Blog</div>
+                  <div className='hover:text-black cursor-pointer'>Youtube Playlist</div>
+                </div>
+              </div>
             </div>
-            <div className='flex flex-col gap-y-3 py-3 w-40 '>
-                <div className='font-bold'>HELP</div>
-                <div>Customer Support</div>
-                <div>Delivery Details</div>
-                <div>Terms & Conditions</div>
-                <div>Privacy Policy</div>
+          </div>
+
+          {/* Footer Bottom */}
+          <div className='border-t border-gray-200 pt-6'>
+            <div className='flex flex-col lg:flex-row lg:justify-between items-center gap-4'>
+              <div className='text-sm text-gray-600'>
+                Shop.co © 2000-2023, All Rights Reserved
+              </div>
+              <div className='flex gap-3'>
+                <FaCcVisa className='w-12 h-8 text-gray-600 hover:text-black cursor-pointer'/>
+                <FaCcMastercard className='w-12 h-8 text-gray-600 hover:text-black cursor-pointer'/>
+                <FaPaypal className='w-12 h-8 text-gray-600 hover:text-black cursor-pointer'/>
+                <FaApplePay className='w-12 h-8 text-gray-600 hover:text-black cursor-pointer'/>
+                <FaGooglePay className='w-12 h-8 text-gray-600 hover:text-black cursor-pointer'/> 
+              </div>
             </div>
-            <div className='flex flex-col gap-y-3 py-3 w-37 '>
-                <div className='font-bold'>FAQ</div>
-                <div>Account</div>
-                <div className='hidden lg:block'>Manage Deliveries</div>
-                <div>Orders</div>
-                <div>Payments</div>
-            </div>
-            <div className='flex flex-col gap-y-3 py-3 w-40 '>
-                <div className='font-bold'>RESOURCES</div>
-                <div>Free eBook</div>
-                <div className='hidden lg:block'>Development Tutorial</div>
-                <div>How-to Blog</div>
-                <div>Youtube Playlist</div>
-            </div>
-            </div>
-            </div>
-            <div className='border'></div>
-            <div className='lg:flex lg:flex-row lg:justify-between mt-3 flex flex-col items-center text-center'>
-            <div>Shop.co © 2000-2023, All Rights Reserved</div>
-            <div className='flex gap-x-3'>
-                <FaCcVisa className='w-10 h-10'/>
-                <FaCcMastercard className='w-10 h-10'/>
-                <FaPaypal className='w-10 h-10'/>
-                <FaApplePay className='w-10 h-10'/>
-                <FaGooglePay className='w-10 h-10'/> 
-            </div>
-            </div>
+          </div>
         </div>
-    </div>
+      </div>
     </footer>
   )
 }
-
-{/* Issue in responsiveness of footer need to do something*/}
-
 
 export default Footer
