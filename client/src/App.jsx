@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ProductDetails from './pages/ProductDetails'
 import Category from './pages/Category'
+import Shop from './pages/Shop'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/cart' element={<Cart />}/>
         <Route path='/product/:id' element={<ProductDetails />} />
         <Route path='/New-Arrivals' element={<Category />} />
+        <Route path='/shop' element={<Shop />} />
       </Routes>
     </main>
     <Footer/>
