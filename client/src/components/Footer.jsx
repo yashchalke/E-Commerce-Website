@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer>
     <div className='relative lg:mt-20 mt-15 '>
-        <div className='absolute top-[-80px] lg:px-10 px-5 py-5 ml-4 w-82 min-w-max rounded-2xl lg:min-w-330 lg:ml-24 lg:min-h-30 lg:top-[-60px] bg-gray-400'>
+        <div className='absolute top-[-80px] lg:px-10 px-5 py-5 ml-4 w-82 rounded-2xl lg:min-w-330 lg:ml-24 lg:min-h-30 lg:top-[-60px] bg-gray-400'>
             <div className='flex flex-col gap-y-3 lg:flex lg:justify-between lg:flex-row'>
                 <div className='text-white text-[13px] text-center lg:text-left lg:flex lg:items-center lg:font-extrabold lg:text-3xl'>
                     STAY UPTO DATE ABOUT <br /> OUR LATEST OFFERS
