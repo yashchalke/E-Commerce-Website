@@ -10,6 +10,8 @@ import Category from './pages/Category'
 import Shop from './pages/Shop'
 import OnSale from './pages/OnSale'
 import BrandPage from './pages/BrandPage'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 
 const App = () => {
   return (
@@ -18,13 +20,17 @@ const App = () => {
     <Navbar />
     <main className='flex-grow'>
       <Routes>
+
         <Route path='/' element={<Home />}/>
+        <Route path='/login' element={<Login />} />
+        <Route path='/SignUp' element={<SignUp />} />
         <Route path='/cart' element={<Cart />}/>
         <Route path='/product/:id' element={<ProductDetails />} />
         <Route path='/New-Arrivals' element={<Category />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/OnSale' element={<OnSale />} />
         <Route path='/Brands' element={<BrandPage />}/>
+
 
       </Routes>
     </main>

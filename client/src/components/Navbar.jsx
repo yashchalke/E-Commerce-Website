@@ -30,7 +30,7 @@ const Navbar = () => {
             <Link to="/New-Arrivals" className="py-2 border-b" onClick={handleClose}>New Arrivals</Link>
             <Link to="/Brands" className="py-2 border-b" onClick={handleClose}>Brands</Link>
             <Link to="/cart" className="py-2 border-b" onClick={handleClose}>Cart</Link>
-            <Link to="/login-page" onClick={handleClose}>
+            <Link to="/login" onClick={handleClose}>
               <button className='mt-4 w-full border px-4 py-2 bg-black text-white rounded-[10px] cursor-pointer'>
                 Login
               </button>
@@ -55,7 +55,7 @@ const Navbar = () => {
             <input type="text" placeholder='Search' className='w-80 h-10 rounded-[20px] border bg-gray-300 text-black pl-3'></input>
         </div>
         <Link to="/cart"><div> <ShoppingBag /> </div></Link>
-        <Link to="login-page"><button className='border px-4 py-2 bg-black text-white rounded-[10px] cursor-pointer'>Login</button></Link>
+        <Link to="login"><button className='border px-4 py-2 bg-black text-white rounded-[10px] cursor-pointer'>Login</button></Link>
         </div>
         </div>
     </div>
