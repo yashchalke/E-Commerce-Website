@@ -9,6 +9,7 @@ import ProductDetails from './pages/ProductDetails'
 import Category from './pages/Category'
 import Shop from './pages/Shop'
 import OnSale from './pages/OnSale'
+import BrandPage from './pages/BrandPage'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/New-Arrivals' element={<Category />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/OnSale' element={<OnSale />} />
+        <Route path='/Brands' element={<BrandPage />}/>
 
       </Routes>
     </main>

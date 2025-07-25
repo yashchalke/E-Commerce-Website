@@ -1,14 +1,10 @@
 import React from 'react'
 import CartItemCard from '../components/CartItemCard'
+import BrandCard from '../components/BrandCard'
 
 const Shop = () => {
   return (
-    <div>
-        <div className='px-4 py-4 border'>
-          
-            
-        </div>
-    </div>
+    <div>shop</div>
   )
 }
 
