@@ -28,7 +28,7 @@ const HeroSection = () => {
       </div>
       
       <div className=''> {/*Right div*/}
-        <div className=''>
+        <div className='flex justify-center'>
         <img src="Model-Photo-1.png" className='w-[650px] '/>
         </div>
       </div>

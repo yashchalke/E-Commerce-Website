@@ -4,8 +4,9 @@ import CartItemCard from '../components/CartItemCard'
 const Shop = () => {
   return (
     <div>
-        <div className='px-4 py-4'>
-            <CartItemCard />
+        <div className='px-4 py-4 border'>
+          
+            
         </div>
     </div>
   )

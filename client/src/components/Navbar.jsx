@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className='font-extrabold text-2xl md:text-4xl md:ml-2 '><Link to="/">Shop</Link></div>
         <div className="hidden lg:flex gap-5 ">
             <Link to="/Shop" className='text-gray-500 hover:text-black hover:underline  transition-colors duration-200'>Shop</Link>
-            <Link to="/On-Sale" className='text-gray-500 hover:text-black hover:underline transition-colors duration-200'>On sale</Link>
+            <Link to="/OnSale" className='text-gray-500 hover:text-black hover:underline transition-colors duration-200'>On sale</Link>
             <Link to="/New-Arrivals" className='text-gray-500 hover:text-black hover:underline transition-colors duration-200'>New Arrivals</Link>
             <Link to="/Brands" className='text-gray-500 hover:text-black hover:underline transition-colors duration-200'>Brands</Link>
         </div>
