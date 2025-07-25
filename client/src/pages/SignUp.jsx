@@ -2,8 +2,8 @@ import React from 'react'
 
 const SignUp = () => {
   return (
-    <div className='px-10 py-10'>
-        <div className='w-full border rounded-xl overflow-hidden'>
+    <div className='px-10 py-10 flex items-center justify-center'>
+        <div className='w-full md:max-w-120  border rounded-xl overflow-hidden '>
             <div className='h-15 bg-black text-white flex items-center px-4 text-2xl'>
                 Register
             </div>
