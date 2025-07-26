@@ -47,8 +47,40 @@ const RegisterUser = async (req,res)=>{
         });
     }
 }
-const LoginUser = async ()=>{
+const LoginUser = async (req,res)=>{
+    try{
+    const {username,Password} = req.body;
+    const checkuser = await User.findOne({username});
+    if(!checkuser){
+        res.status(400).json({
+            Success : false,
+            message : "User is not Registered!!"
+        });
+    }
+    
+    const validateuser = await bcrypt.compare(Password,checkuser.Password);
 
+    if(!validateuser){
+        res.status(400).json({
+            Success : false,
+            Message : "Invalid Password!! Try Again.."
+        });
+    }
+    else{
+         res.status(200).json({
+            Success : true,
+            Message : "Login Successful",
+            details : checkuser
+        });
+    }
+}
+catch(err){
+    console.log("Something went Wrong:" , err);
+    res.status(400).json({
+            Success : false,
+            Message : "Something Went Wrong..."
+        });
+}
 }
 
 module.exports = {RegisterUser,LoginUser}
