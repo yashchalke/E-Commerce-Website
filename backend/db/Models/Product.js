@@ -4,7 +4,7 @@ const ProductSchema = new mongoose.Schema({
     productname : {
         type:String,
         unique:true,
-        required
+        Required:true
     },
     productimg : {
         main : {
@@ -20,11 +20,11 @@ const ProductSchema = new mongoose.Schema({
     },
     price : {
         type:Number,
-        required
+        Required:true
     },
     desc : {
         type:String,
-        required
+        Required:true
     }
 },{timestamps:true});
 
