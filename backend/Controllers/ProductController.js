@@ -35,4 +35,30 @@ const NewProductController = async (req,res) =>{
     }
 }
 
-module.exports = NewProductController;
+const GetProductController = async (req,res)=>{
+    try{
+        const products = await Product.find({});
+        if(products.length === 0){
+            res.status(404).json({
+                Success : false,
+                message : "There are no Products"
+            });
+        }
+        else{
+            res.status(200).json({
+                Success : true,
+                message : "Products Fetched Successfully",
+                Data : products
+            });
+        }
+
+    }catch(err){
+        console.log("Something Went Wrong" , err);
+        res.status(404).json({
+                Success : false,
+                message : "Something went wrong!!!"
+            });
+    }
+}
+
+module.exports = {NewProductController,GetProductController};
