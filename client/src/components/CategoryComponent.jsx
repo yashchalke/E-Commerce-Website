@@ -1,120 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import { products } from '../assets/products/productimages'
 import { FilterIcon } from 'lucide-react';
 import {RangeSlider} from "react-range-slider-input"
 
 const CategoryComponent = ({CategoryType}) => {
-    const dummy = [
-        {
-                id:1,
-                productimage:products.product_1,
-                productname:"T-Shirt with tape Details",
-                price:"$120"
-              },
-              {
-                id:2,
-                productimage:products.product_2,
-                productname:"Skinny Fit Jeans",
-                price:"$140"
-              },
-              {
-                id:3,
-                productimage:products.product_3,
-                productname:"Checkered Shirt",
-                price:"$180"
-              },
-              {
-                id:4,
-                productimage:products.product_4,
-                productname:"Sleeve Stripped T-shirt",
-                price:"$130"
-              },
-              {
-                id:1,
-                productimage:products.product_1,
-                productname:"T-Shirt with tape Details",
-                price:"$120"
-              },
-              {
-                id:2,
-                productimage:products.product_2,
-                productname:"Skinny Fit Jeans",
-                price:"$140"
-              },
-              {
-                id:3,
-                productimage:products.product_3,
-                productname:"Checkered Shirt",
-                price:"$180"
-              },
-              {
-                id:4,
-                productimage:products.product_4,
-                productname:"Sleeve Stripped T-shirt",
-                price:"$130"
-              },
-              {
-                id:1,
-                productimage:products.product_1,
-                productname:"T-Shirt with tape Details",
-                price:"$120"
-              },
-              {
-                id:2,
-                productimage:products.product_2,
-                productname:"Skinny Fit Jeans",
-                price:"$140"
-              },
-              {
-                id:3,
-                productimage:products.product_3,
-                productname:"Checkered Shirt",
-                price:"$180"
-              },
-              {
-                id:4,
-                productimage:products.product_4,
-                productname:"Sleeve Stripped T-shirt",
-                price:"$130"
-              },{
-                id:1,
-                productimage:products.product_1,
-                productname:"T-Shirt with tape Details",
-                price:"$120"
-              },
-              {
-                id:2,
-                productimage:products.product_2,
-                productname:"Skinny Fit Jeans",
-                price:"$140"
-              },
-              {
-                id:3,
-                productimage:products.product_3,
-                productname:"Checkered Shirt",
-                price:"$180"
-              },
-              {
-                id:4,
-                productimage:products.product_4,
-                productname:"Sleeve Stripped T-shirt",
-                price:"$130"
-              },
-              {
-                id:1,
-                productimage:products.product_1,
-                productname:"T-Shirt with tape Details",
-                price:"$120"
-              },
-              {
-                id:2,
-                productimage:products.product_2,
-                productname:"Skinny Fit Jeans",
-                price:"$140"
-              },
-              
-    ];
+    const [products,setproducts] = useState([]);
+    const [loading,setloading] = useState(true);
+    const [error,seterror] = useState(null);
+
+    useEffect(()=>{
+      const fetchproducts = async ()=>{
+        try{
+        const response = await fetch('http://localhost:3000/Api/Product/all-products');
+        if(!response.ok){
+          throw new Error('Network Error');
+        }
+        const data = await response.json();
+        if(data.Success){
+          setproducts(data.Data || []);
+        }
+        else{
+          throw new Error(data.message || "Failed to Fetch");
+        }
+    }
+    catch(err){
+      console.log(err);
+      seterror(err.message);
+    }
+    finally{
+      setloading(false);
+    }
+  }
+  fetchproducts();
+    },[]);
+
+    if(loading){
+      return (<p>Loading.....</p>)
+    }
+    if(error){
+      return (<p>Failed to Fetch: {error}</p>)
+    }
   return (
     <div className='md:px-10 md:py-10 px-4 py-2'>
         <div className='md:grid lg:grid-cols-[20%_80%] gap-10'>
@@ -228,11 +154,11 @@ const CategoryComponent = ({CategoryType}) => {
                 </div>
             </div> 
                 <div className=' md:px-17 md:py-4 md:flex md:flex-wrap md:gap-5 flex flex-wrap gap-5 py-5'>
-                    {dummy.map((product) => (
-                    <div className="w-[160px] md:w-auto " key={product.id}>
+                    {products.map((product) => (
+                    <div className="w-[160px] md:w-auto " key={product._id}>
                         <ProductCard 
-                    id = {product.id}
-                    productimage = {product.productimage}
+                    id = {product._id}
+                    productimage = {product.productimg.main}
                     productname = {product.productname}
                     price = {product.price}
                     />
