@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ProductCard        from './ProductCard';
+import ProductCard from './ProductCard';
 
 /* UI section that shows the newest products */
 function NewArrivals() {
@@ -45,10 +45,10 @@ if (error) {
     <div className="flex flex-col gap-y-5 px-6 py-4">
       <h2 className="text-center py-2 text-3xl font-bold">NEW ARRIVALS</h2>
 
-      <div className="lg:flex lg:gap-x-8 flex flex-row overflow-x-auto gap-x-4 scroll-smooth">
+      <div className="lg:flex lg:gap-x-8 flex flex-row overflow-x-auto gap-x-4 scroll-smooth lg:px-30">
         {products.map(p => (
           <ProductCard
-            key={p._id}                 // REQUIRED so React can diff the list
+            key={p._id}                 
             id={p._id}
             productname={p.productname}
             productimage={p.productimg.main}
