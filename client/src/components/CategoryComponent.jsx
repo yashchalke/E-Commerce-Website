@@ -9,109 +9,109 @@ const CategoryComponent = ({CategoryType}) => {
         {
                 id:1,
                 productimage:products.product_1,
-                Title:"T-Shirt with tape Details",
-                Price:"$120"
+                productname:"T-Shirt with tape Details",
+                price:"$120"
               },
               {
                 id:2,
                 productimage:products.product_2,
-                Title:"Skinny Fit Jeans",
-                Price:"$140"
+                productname:"Skinny Fit Jeans",
+                price:"$140"
               },
               {
                 id:3,
                 productimage:products.product_3,
-                Title:"Checkered Shirt",
-                Price:"$180"
+                productname:"Checkered Shirt",
+                price:"$180"
               },
               {
                 id:4,
                 productimage:products.product_4,
-                Title:"Sleeve Stripped T-shirt",
-                Price:"$130"
+                productname:"Sleeve Stripped T-shirt",
+                price:"$130"
               },
               {
                 id:1,
                 productimage:products.product_1,
-                Title:"T-Shirt with tape Details",
-                Price:"$120"
+                productname:"T-Shirt with tape Details",
+                price:"$120"
               },
               {
                 id:2,
                 productimage:products.product_2,
-                Title:"Skinny Fit Jeans",
-                Price:"$140"
+                productname:"Skinny Fit Jeans",
+                price:"$140"
               },
               {
                 id:3,
                 productimage:products.product_3,
-                Title:"Checkered Shirt",
-                Price:"$180"
+                productname:"Checkered Shirt",
+                price:"$180"
               },
               {
                 id:4,
                 productimage:products.product_4,
-                Title:"Sleeve Stripped T-shirt",
-                Price:"$130"
+                productname:"Sleeve Stripped T-shirt",
+                price:"$130"
               },
               {
                 id:1,
                 productimage:products.product_1,
-                Title:"T-Shirt with tape Details",
-                Price:"$120"
+                productname:"T-Shirt with tape Details",
+                price:"$120"
               },
               {
                 id:2,
                 productimage:products.product_2,
-                Title:"Skinny Fit Jeans",
-                Price:"$140"
+                productname:"Skinny Fit Jeans",
+                price:"$140"
               },
               {
                 id:3,
                 productimage:products.product_3,
-                Title:"Checkered Shirt",
-                Price:"$180"
+                productname:"Checkered Shirt",
+                price:"$180"
               },
               {
                 id:4,
                 productimage:products.product_4,
-                Title:"Sleeve Stripped T-shirt",
-                Price:"$130"
+                productname:"Sleeve Stripped T-shirt",
+                price:"$130"
               },{
                 id:1,
                 productimage:products.product_1,
-                Title:"T-Shirt with tape Details",
-                Price:"$120"
+                productname:"T-Shirt with tape Details",
+                price:"$120"
               },
               {
                 id:2,
                 productimage:products.product_2,
-                Title:"Skinny Fit Jeans",
-                Price:"$140"
+                productname:"Skinny Fit Jeans",
+                price:"$140"
               },
               {
                 id:3,
                 productimage:products.product_3,
-                Title:"Checkered Shirt",
-                Price:"$180"
+                productname:"Checkered Shirt",
+                price:"$180"
               },
               {
                 id:4,
                 productimage:products.product_4,
-                Title:"Sleeve Stripped T-shirt",
-                Price:"$130"
+                productname:"Sleeve Stripped T-shirt",
+                price:"$130"
               },
               {
                 id:1,
                 productimage:products.product_1,
-                Title:"T-Shirt with tape Details",
-                Price:"$120"
+                productname:"T-Shirt with tape Details",
+                price:"$120"
               },
               {
                 id:2,
                 productimage:products.product_2,
-                Title:"Skinny Fit Jeans",
-                Price:"$140"
+                productname:"Skinny Fit Jeans",
+                price:"$140"
               },
               
     ];
@@ -132,7 +132,7 @@ const CategoryComponent = ({CategoryType}) => {
                     <label><input type='checkbox' value={"Jeans"}/> Jeans</label>
                 </div>
                 <div className='px-2 py-2 h-30 border-b-2'>
-                    <h1 className='text-xl font-semibold'>Price</h1>
+                    <h1 className='text-xl font-semibold'>price</h1>
                         <div className="flex items-center gap-2 mb-2">
                         <span className="bg-gray-200 px-3 py-1 rounded text-sm">$0</span>
                         <input 
@@ -144,7 +144,7 @@ const CategoryComponent = ({CategoryType}) => {
                         <span className="bg-gray-200 px-3 py-1 rounded text-sm">$1000</span>
                     </div>
                     <div className="text-sm text-gray-600 text-center">
-                        Price: $XXX&nbsp;-&nbsp;$YYY
+                        price: $XXX&nbsp;-&nbsp;$YYY
                     </div>
                     </div>
                 <div className='px-2 py-2 border-b-2'>
@@ -233,8 +233,8 @@ const CategoryComponent = ({CategoryType}) => {
                         <ProductCard 
                     id = {product.id}
                     productimage = {product.productimage}
-                    Title = {product.Title}
-                    Price = {product.Price}
+                    productname = {product.productname}
+                    price = {product.price}
                     />
                     </div>))}
                     

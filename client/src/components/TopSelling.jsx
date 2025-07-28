@@ -9,26 +9,26 @@ const TopSelling = () => {
           {
             id:5,
             productimage:products.product_5,
-            Title:"Vertical Stripped Shirt",
-            Price:"$212"
+            productname:"Vertical Stripped Shirt",
+            price:"$212"
           },
           {
             id:6,
             productimage:products.product_6,
-            Title:"Courage Graphic T-shirt",
-            Price:"$145"
+            productname:"Courage Graphic T-shirt",
+            price:"$145"
           },
           {
             id:7,
             productimage:products.product_7,
-            Title:"Loose Fit Bermuda Shorts",
-            Price:"$80"
+            productname:"Loose Fit Bermuda Shorts",
+            price:"$80"
           },
           {
             id:8,
             productimage:products.product_8,
-            Title:"Faded Skinny jeans",
-            Price:"$210"
+            productname:"Faded Skinny jeans",
+            price:"$210"
           }
         ];
   return (
@@ -38,8 +38,8 @@ const TopSelling = () => {
             {dummy.map((item)=>(<ProductCard 
               id = {item.id}
               productimage = {item.productimage}
-              Title = {item.Title}
-              Price ={item.Price}
+              productname = {item.productname}
+              price ={item.price}
             />))}
         </div>
         <div className='flex justify-center'>
