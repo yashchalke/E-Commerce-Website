@@ -10,7 +10,7 @@ function NewArrivals() {
   useEffect(()=>{
     const fetchproducts = async ()=>{
       try{
-      const response = await fetch('http://localhost:3000/Api/Product/all-products');
+      const response = await fetch('http://localhost:3000/Api/Product/newarrivals');
       if(!response.ok){
         throw new Error('Network error');
       }

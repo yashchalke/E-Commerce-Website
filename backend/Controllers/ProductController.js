@@ -62,8 +62,45 @@ const GetProductController = async (req,res)=>{
 }
 
 const NewArrivalsController = async (req,res) => {
+    try{
     const list = await Product.find().sort({createdAt: -1}).limit(4);
-    res.json(list);
+    if(list){
+        res.status(200).json({
+            Success:true,
+            message: "New Products Fetched Successfully!!!",
+            Data:list
+        });
+    }
+    }
+    catch(err){
+        console.log(err);
+        res.status(404).json({
+            Success:false,
+            message:"No products Found. Something went wrong",
+            Error:err
+        })
+    }
 }
 
-module.exports = {NewProductController,GetProductController,NewArrivalsController};
+const TopSellingController = async (req,res) => {
+    try{
+    const list = await Product.find().limit(4);
+    if(list){
+        res.status(200).json({
+            Success:true,
+            message: "New Products Fetched Successfully!!!",
+            Data:list
+        });
+    }
+    }
+    catch(err){
+        console.log(err);
+        res.status(404).json({
+            Success:false,
+            message:"No products Found. Something went wrong",
+            Error:err
+        })
+    }
+}
+
+module.exports = {NewProductController,GetProductController,NewArrivalsController,TopSellingController};

@@ -12,7 +12,7 @@ const TopSelling = () => {
     useEffect(()=>{
       const fetchproducts = async () =>{
         try{
-        const response = await fetch('http://localhost:3000/Api/Product/all-products');
+        const response = await fetch('http://localhost:3000/Api/Product/topselling');
         if(!response.ok){
           throw new Error('Network error');
         }
