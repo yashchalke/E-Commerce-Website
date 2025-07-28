@@ -61,4 +61,9 @@ const GetProductController = async (req,res)=>{
     }
 }
 
-module.exports = {NewProductController,GetProductController};
+const NewArrivalsController = async (req,res) => {
+    const list = await Product.find().sort({createdAt: -1}).limit(4);
+    res.json(list);
+}
+
+module.exports = {NewProductController,GetProductController,NewArrivalsController};
