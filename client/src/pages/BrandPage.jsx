@@ -1,10 +1,11 @@
 import React from 'react'
 import BrandCard from '../components/BrandCard'
+import TopSelling from '../components/TopSelling'
 
 const BrandPage = () => {
   return (
     <div>
-        <div className='lg:px-30 lg:py-4 px-8 py-4 gap-4 justify-center md:flex flex flex-wrap md:gap-10 md:justify-center'>
+        <div className='flex flex-wrap justify-center gap-4 px-8 py-4 lg:px-30 lg:py-4 md:flex md:gap-10 md:justify-center'>
           <BrandCard 
           Brandname={"ZARA"}
           />
@@ -37,6 +38,7 @@ const BrandPage = () => {
           />
             
         </div>
+        
     </div>
   )
 }

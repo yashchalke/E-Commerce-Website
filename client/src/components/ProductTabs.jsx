@@ -16,8 +16,8 @@ const ProductTabs = () => {
 
     const [SelectedTab , SetSelectedTab] = useState("details")
   return (
-    <>
-    <div className='flex justify-between md:px-20 lg:px-50 border-b-2 border-gray-300'>
+    <div>
+    <div className='flex justify-between border-b-2 border-gray-300 md:px-20 lg:px-50'>
         {tabs.map((tab) => (
         <button
         key={tab.value}
@@ -32,9 +32,9 @@ const ProductTabs = () => {
     { SelectedTab === "reviews" && (
         <div className='px-4 py-4'>
             <div>
-            <h1 className='text-xl font-semibold '>All Reviews <span className='text-gray-400 font-light text-sm'>({reviews.length})</span></h1>
+            <h1 className='text-xl font-semibold '>All Reviews <span className='text-sm font-light text-gray-400'>({reviews.length})</span></h1>
             </div>
-            <div className='md:block hidden'>
+            <div className='hidden md:block'>
             <div className='flex flex-wrap justify-center'>
                 {latestreviews.map((review) => (<Reviewcard/>))}    
             </div>
@@ -47,8 +47,8 @@ const ProductTabs = () => {
         </div>
         )}
     { SelectedTab === "FAQs" && (<div>FAQs</div>)}
-    <TopSelling />
-    </>
+    
+    </div>
   )
 }
 

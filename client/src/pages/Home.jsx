@@ -14,7 +14,7 @@ const Home = () => {
         <HeroSection />
         <Logoslider />
         <NewArrivals />
-        <div className='border lg:mx-10 mx-3'></div>
+        <div className='mx-3 border lg:mx-10'></div>
         <TopSelling />
         <BrowseByDressStyle />
         <HappyCustomers />
