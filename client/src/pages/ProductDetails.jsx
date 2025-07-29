@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import ProductTabs from '../components/ProductTabs'
 import TopSelling from '../components/TopSelling'
 import NewArrivals from '../components/NewArrivals'
+import { useParams } from 'react-router-dom'
 
 const ProductDetails = () => {
+  const {id} = useParams();
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[id]);
+  
   return (
     <div className='md:px-10 md:py-10'>
       <div className='justify-between md:flex'>
