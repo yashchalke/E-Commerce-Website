@@ -66,7 +66,7 @@ const ProductDetails = () => {
         </div>
       </div>
       <ProductTabs />
-      <NewArrivals />
+      <NewArrivals /> {/*Photos are not visible on this page */}
     </div>
   )
 }
