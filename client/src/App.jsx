@@ -15,10 +15,10 @@ import SignUp from './pages/SignUp'
 
 const App = () => {
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className='flex flex-col min-h-screen'>
     <Blackbox />
     <Navbar />
-    <main className='flex-grow'>
+    <main className='flex-grow scroll-smooth'>
       <Routes>
 
         <Route path='/' element={<Home />}/>
