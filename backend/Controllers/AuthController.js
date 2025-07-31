@@ -1,5 +1,6 @@
 const User = require('../db/Models/User');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const RegisterUser = async (req,res)=>{
     try{
@@ -22,11 +23,15 @@ const RegisterUser = async (req,res)=>{
             });
 
             await newUser.save();
+            const payload = {UserId: {id: newUser._id}};
+            const token = jwt.sign(payload, process.env.JWT_SECRET , {expiresIn:"1d"});
+                          
             if(newUser){
                 res.status(201).json({
                     Success : true,
                     message : "new user registered Successfully!!!",
-                    data : newUser
+                    data : newUser,
+                    token: token
                 });
             }
             else{
@@ -67,10 +72,13 @@ const LoginUser = async (req,res)=>{
         });
     }
     else{
+        const payload = {userId: {id:checkuser._id}};
+        const token = await jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:"1d"});
          res.status(200).json({
             Success : true,
             Message : "Login Successful",
-            details : checkuser
+            details : checkuser,
+            token:token
         });
     }
 }
