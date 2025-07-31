@@ -4,9 +4,9 @@ const AuthMiddleware = require('../middlewares/Authmiddleware');
 
 const router = express.Router();
 
-router.post('/new-product',NewProductController);
-router.get('/all-products',GetProductController);
+router.post('/new-product',AuthMiddleware ,NewProductController);
+router.get('/all-products',AuthMiddleware ,GetProductController);
 router.get('/newarrivals',AuthMiddleware ,NewArrivalsController);
-router.get('/topselling',TopSellingController);
+router.get('/topselling',AuthMiddleware ,TopSellingController);
 
 module.exports = router;

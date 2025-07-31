@@ -9,8 +9,9 @@ function NewArrivals() {
 
   useEffect(()=>{
     const fetchproducts = async ()=>{
+      const token = localStorage.getItem('token');
       try{
-      const response = await fetch('http://localhost:3000/Api/Product/newarrivals');
+      const response = await fetch('http://localhost:3000/Api/Product/newarrivals' , {headers: {'Authorization': `Bearer ${token}`}});
       if(!response.ok){
         throw new Error('Network error');
       }
@@ -42,10 +43,10 @@ if (error) {
   }
 
   return (
-    <div className="flex flex-col gap-y-5 px-6 py-4">
-      <h2 className="text-center py-2 text-3xl font-bold">NEW ARRIVALS</h2>
+    <div className="flex flex-col px-6 py-4 gap-y-5">
+      <h2 className="py-2 text-3xl font-bold text-center">NEW ARRIVALS</h2>
 
-      <div className="lg:flex lg:gap-x-8 flex flex-row overflow-x-auto gap-x-4 scroll-smooth lg:px-30">
+      <div className="flex flex-row overflow-x-auto lg:flex lg:gap-x-8 gap-x-4 scroll-smooth lg:px-30">
         {products.map(p => (
           <ProductCard
             key={p._id}                 
@@ -58,7 +59,7 @@ if (error) {
       </div>
 
       <div className="flex justify-center">
-        <button className="border px-12 py-1 rounded-3xl hover:bg-black hover:text-white transition duration-200">
+        <button className="px-12 py-1 transition duration-200 border rounded-3xl hover:bg-black hover:text-white">
           view all
         </button>
       </div>

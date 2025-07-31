@@ -11,8 +11,9 @@ const TopSelling = () => {
 
     useEffect(()=>{
       const fetchproducts = async () =>{
+        const token = localStorage.getItem('token');
         try{
-        const response = await fetch('http://localhost:3000/Api/Product/topselling');
+        const response = await fetch('http://localhost:3000/Api/Product/topselling', {headers: {'Authorization': `Bearer ${token}`}});
         if(!response.ok){
           throw new Error('Network error');
         }
@@ -41,9 +42,9 @@ const TopSelling = () => {
       return (<p>Failed to fetch products..</p>)
     }
   return (
-    <div className='flex flex-col gap-y-5 px-6 py-4'>
-        <div className='text-center py-2 text-3xl font-bold'>TOP SELLING</div>
-        <div className='lg:flex lg:gap-x-8 lg:px-30 flex flex-row overflow-x-auto gap-x-4 scroll-smooth'>
+    <div className='flex flex-col px-6 py-4 gap-y-5'>
+        <div className='py-2 text-3xl font-bold text-center'>TOP SELLING</div>
+        <div className='flex flex-row overflow-x-auto lg:flex lg:gap-x-8 lg:px-30 gap-x-4 scroll-smooth'>
             {products.map((product)=>(
               <ProductCard 
               key={product._id}
@@ -55,7 +56,7 @@ const TopSelling = () => {
             ))}
         </div>
         <div className='flex justify-center'>
-        <button className='border px-12 py-1 rounded-3xl hover:cursor-pointer hover:bg-black hover:text-white transition duration-200'>view all</button>
+        <button className='px-12 py-1 transition duration-200 border rounded-3xl hover:cursor-pointer hover:bg-black hover:text-white'>view all</button>
         </div>
     </div>
   )

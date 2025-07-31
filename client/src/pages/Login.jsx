@@ -30,7 +30,8 @@ const Login = () => {
             const data = await response.json();
 
             if(response.ok){
-                ShowToast('Login was Successfull!!')
+                ShowToast('Login was Successfull!!');
+                localStorage.setItem('token',data.token);
             }
             else{
                 ShowToast(data.message || 'Login Failed');
