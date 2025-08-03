@@ -14,8 +14,9 @@ const ProductDetails = () => {
   useEffect(()=>{
     window.scrollTo(0,0);
     const fetchProduct = async()=>{
+      const token = localStorage.getItem('token');
       try{
-        const response = await fetch(`http://localhost:3000/Api/Product/${id}`);
+        const response = await fetch(`http://localhost:3000/Api/Product/${id}`,{headers: {'Authorization': `Bearer ${token}`}});
         if(!response.ok){
           throw new Error("Products not found!!");
         }
@@ -39,7 +40,7 @@ const ProductDetails = () => {
   return (
     <div className='md:px-10 md:py-10'>
       <div className='justify-between md:flex'>
-        <div className=' md:min-w-[49%] md:h-fit grid grid-cols-[25%_65%] gap-3 px-3 py-3'>
+        <div className=' md:min-w-[49%] md:h-fit grid grid-cols-[25%_65%] gap-3 px-3 py-3 border'>
           <div className='grid grid-rows-3 gap-3'>
             <div className='overflow-hidden border rounded-2xl h-fit'>
               <img src={products.product_1} className=''/>

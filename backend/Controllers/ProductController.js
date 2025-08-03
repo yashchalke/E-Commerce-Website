@@ -1,4 +1,5 @@
 const Product = require('../db/Models/Product')
+const Cart = require('../db/Models/Cart')
 
 const NewProductController = async (req,res) =>{
     try{
@@ -130,5 +131,6 @@ const GetproductbyId = async(req,res) =>{
             });
     }
 }
+
 
 module.exports = {NewProductController,GetProductController,NewArrivalsController,TopSellingController,GetproductbyId};
