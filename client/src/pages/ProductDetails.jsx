@@ -14,22 +14,33 @@ const ProductDetails = () => {
     window.scrollTo(0,0);
     const fetchProduct = async()=>{
       try{
-        const response = await fetch('')
+        const response = await fetch(`http://localhost:3000/Api/Product/${id}`);
+        if(!response.ok){
+          throw new Error("Products not found!!");
+        }
+        const data = await response.json();
+        setproduct(data.Data || []);
       }
       catch(err){
-        
+        console.error(err);
+      }
+      finally{
+        setloading(false);
       }
     }
 
     fetchProduct();
   },[id]);
+
+  if (loading) return <p>Loading...</p>;
+  if (!product) return <p>Product not found.</p>;
   
   return (
     <div className='md:px-10 md:py-10'>
       <div className='justify-between md:flex'>
         <div className=' md:min-w-[49%] md:h-auto grid grid-cols-[25%_65%] grid-rows-3 gap-2 px-3 py-3'>
             <div className='overflow-hidden border rounded-2xl'>
-              {/*<img src={products.product_1} className=''/>*/}
+              <img src="./assets/products/product-1.png" className=''/>
             </div>
             <div className='col-start-1 row-start-2 overflow-hidden border rounded-2xl'>
               {/*<img src={products.product_1} className=''/>*/}
@@ -37,16 +48,17 @@ const ProductDetails = () => {
             <div className='col-start-1 row-start-3 overflow-hidden border rounded-2xl'>
               {/*<img src={products.product_1} className=''/>*/}
             </div>
-            <div className='col-span-2 col-start-2 row-span-3 row-start-1 border rounded-2xl'></div>
+            <div className='col-span-2 col-start-2 row-span-3 row-start-1 overflow-hidden border rounded-2xl h-fit'>
+              <img src={product.productimg.main} className='' />
+            </div>
         </div>
         
       
         <div className='md:min-w-[49%] md:h-auto px-5 py-5'>
           <div className='flex flex-col gap-y-2'>
-            <h1 className='text-4xl font-bold'>One Life Graphic T-shirt</h1>
-            <p className='text-2xl'>$260</p>
-            <p className='font-extralight'>This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, 
-              it offers superior comfort and style.</p>
+            <h1 className='text-4xl font-bold'>{product.productname}</h1>
+            <p className='text-2xl'>{product.price}</p>
+            <p className='font-extralight'>{product.desc}</p>
           </div>
           <div className='my-5 border border-gray-400'></div> {/*line*/}
           <div className=''> {/*colors*/}
