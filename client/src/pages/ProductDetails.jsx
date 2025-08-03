@@ -4,6 +4,7 @@ import ProductTabs from '../components/ProductTabs'
 import TopSelling from '../components/TopSelling'
 import NewArrivals from '../components/NewArrivals'
 import { useParams } from 'react-router-dom'
+import {products} from '../assets/products/productimages'
 
 const ProductDetails = () => {
   const {id} = useParams();
@@ -38,19 +39,22 @@ const ProductDetails = () => {
   return (
     <div className='md:px-10 md:py-10'>
       <div className='justify-between md:flex'>
-        <div className=' md:min-w-[49%] md:h-auto grid grid-cols-[25%_65%] grid-rows-3 gap-2 px-3 py-3'>
-            <div className='overflow-hidden border rounded-2xl'>
-              <img src="./assets/products/product-1.png" className=''/>
+        <div className=' md:min-w-[49%] md:h-fit grid grid-cols-[25%_65%] gap-3 px-3 py-3'>
+          <div className='grid grid-rows-3 gap-3'>
+            <div className='overflow-hidden border rounded-2xl h-fit'>
+              <img src={products.product_1} className=''/>
             </div>
-            <div className='col-start-1 row-start-2 overflow-hidden border rounded-2xl'>
-              {/*<img src={products.product_1} className=''/>*/}
+            <div className='overflow-hidden border rounded-2xl h-fit'>
+              <img src={products.product_1} className=''/>
             </div>
-            <div className='col-start-1 row-start-3 overflow-hidden border rounded-2xl'>
-              {/*<img src={products.product_1} className=''/>*/}
+            <div className='overflow-hidden border rounded-2xl h-fit'>
+              <img src={products.product_1} className=''/>
+            </div>
             </div>
             <div className='col-span-2 col-start-2 row-span-3 row-start-1 overflow-hidden border rounded-2xl h-fit'>
               <img src={product.productimg.main} className='' />
             </div>
+            
         </div>
         
       
