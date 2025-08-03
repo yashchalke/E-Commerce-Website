@@ -103,4 +103,32 @@ const TopSellingController = async (req,res) => {
     }
 }
 
-module.exports = {NewProductController,GetProductController,NewArrivalsController,TopSellingController};
+const GetproductbyId = async(req,res) =>{
+    try{
+        const {id} = req.params;
+        const checkproduct = await Product.findById(id);
+        if(!checkproduct){
+            res.status(401).json({
+                Success:false,
+                message:"Product not found!!!"
+            });
+        }
+        else{
+            res.status(200).json({
+                Success:true,
+                message:"Product Found!!!",
+                Data:checkproduct
+            });
+        }
+    }
+    catch(err){
+        console.log("Error Fetching single Product" , err)
+        res.status(401).json({
+                Success:false,
+                message:"Product not found!!!",
+                error:err
+            });
+    }
+}
+
+module.exports = {NewProductController,GetProductController,NewArrivalsController,TopSellingController,GetproductbyId};

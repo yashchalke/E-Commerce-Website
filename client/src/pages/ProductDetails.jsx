@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ProductTabs from '../components/ProductTabs'
 import TopSelling from '../components/TopSelling'
@@ -7,8 +7,21 @@ import { useParams } from 'react-router-dom'
 
 const ProductDetails = () => {
   const {id} = useParams();
+  const [product,setproduct] = useState(null);
+  const [loading,setloading] = useState(true);
+  
   useEffect(()=>{
     window.scrollTo(0,0);
+    const fetchProduct = async()=>{
+      try{
+        const response = await fetch('')
+      }
+      catch(err){
+        
+      }
+    }
+
+    fetchProduct();
   },[id]);
   
   return (
