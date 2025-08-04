@@ -32,6 +32,7 @@ const Login = () => {
             if(response.ok){
                 ShowToast('Login was Successfull!!');
                 localStorage.setItem('token',data.token);
+                navigate('/');
             }
             else{
                 ShowToast(data.message || 'Login Failed');
