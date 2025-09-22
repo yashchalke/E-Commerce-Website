@@ -1,44 +1,75 @@
-import React from 'react'
-import Reviewcard from '../components/Reviewcard'
-import CartItemCard from '../components/CartItemCard'
+import React, { useEffect, useState } from 'react';
+import CartItemCard from '../components/CartItemCard';
 
 const Cart = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [subtotal, setSubtotal] = useState(0);
+  const deliveryFee = 15;
+  const discount = 0;
+
+  // Load cart items and calculate subtotal
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartItems(storedCart);
+    calculateSubtotal(storedCart);
+  }, []);
+
+  // Recalculate subtotal
+  const calculateSubtotal = (items) => {
+    const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setSubtotal(total);
+  };
+
+  // Handle quantity change
+  const handleQuantityChange = (id, newQuantity) => {
+    const updatedCart = cartItems
+      .map(item => item.id === id ? { ...item, quantity: newQuantity } : item)
+      .filter(item => item.quantity > 0);
+
+    setCartItems(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    calculateSubtotal(updatedCart);
+  };
+
   return (
-    <div className='md:px-12 md:py-5 px-5 py-5'> 
-      <h1 className='md:text-4xl font-extrabold text-2xl mb-5'>YOUR CART</h1>
-      
+    <div className='px-5 py-5 md:px-12 md:py-5'>
+      <h1 className='mb-5 text-2xl font-extrabold md:text-4xl'>YOUR CART</h1>
+
       <div className='md:grid md:grid-cols-[60%_39%] gap-4'>
         {/* Cart Items Section */}
-        <div className='border border-gray-300 rounded-xl p-2 mt-5 md:mt-0 overflow-hidden'>
-          <div className='border-b-2 border-gray-300 w-full'>
-            <CartItemCard />
-          </div>
-          <div className='border-b-2 border-gray-300 w-full'>
-            <CartItemCard />
-          </div>
+        <div className='p-2 mt-5 overflow-hidden border border-gray-300 rounded-xl md:mt-0'>
+          {cartItems.length === 0 ? (
+            <p className='py-5 text-center'>Your cart is empty.</p>
+          ) : (
+            cartItems.map((item, index) => (
+              <div key={index} className='w-full border-b-2 border-gray-300'>
+                <CartItemCard item={item} onQuantityChange={handleQuantityChange} />
+              </div>
+            ))
+          )}
         </div>
 
         {/* Order Summary Section */}
         <div className='mt-5 md:mt-0'>
-          <div className='border rounded-xl border-gray-300 p-4'>
-            <h2 className='font-semibold text-lg mb-4'>Order Summary</h2>
-            
+          <div className='p-4 border border-gray-300 rounded-xl'>
+            <h2 className='mb-4 text-lg font-semibold'>Order Summary</h2>
+
             <div className='space-y-3'>
               {/* Price Breakdown */}
               <div className='space-y-2'>
                 <div className='flex justify-between'>
                   <span className='font-light'>Subtotal</span>
-                  <span className='font-semibold'>$565</span>
+                  <span className='font-semibold'>${subtotal.toFixed(2)}</span>
                 </div>
-                
+
                 <div className='flex justify-between'>
                   <span className='font-light'>Discount</span>
-                  <span className='font-semibold text-red-500'>-$113</span>
+                  <span className='font-semibold text-red-500'>-${discount.toFixed(2)}</span>
                 </div>
-                
+
                 <div className='flex justify-between'>
                   <span className='font-light'>Delivery Fee</span>
-                  <span className='font-semibold'>$15</span>
+                  <span className='font-semibold'>${deliveryFee.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -46,23 +77,25 @@ const Cart = () => {
 
               <div className='flex justify-between text-lg'>
                 <span className='font-semibold'>Total</span>
-                <span className='font-bold'>$467</span>
+                <span className='font-bold'>
+                  ${(subtotal - discount + deliveryFee).toFixed(2)}
+                </span>
               </div>
 
               {/* Coupon Section */}
               <div className='grid grid-cols-[1fr_auto] gap-3 mt-4'>
-                <input 
-                  className='py-2 px-3 bg-gray-100 rounded-full text-sm w-full' 
+                <input
+                  className='w-full px-3 py-2 text-sm bg-gray-100 rounded-full'
                   placeholder='Apply Coupon'
                   type="text"
                 />
-                <button className='px-4 py-2 text-white bg-black rounded-full text-sm font-medium hover:bg-gray-800 transition-colors'>
+                <button className='px-4 py-2 text-sm font-medium text-white transition-colors bg-black rounded-full hover:bg-gray-800'>
                   Apply
                 </button>
               </div>
 
               {/* Checkout Button */}
-              <button className='w-full py-3 text-white bg-black rounded-full text-sm font-medium hover:bg-gray-800 transition-colors mt-4'>
+              <button className='w-full py-3 mt-4 text-sm font-medium text-white transition-colors bg-black rounded-full hover:bg-gray-800'>
                 Go to Checkout
               </button>
             </div>
@@ -70,7 +103,7 @@ const Cart = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

@@ -1,49 +1,55 @@
 import React from 'react'
 import { products } from '../assets/products/productimages'
 
-const CartItemCard = () => {
+const CartItemCard = ({ item, onQuantityChange }) => {
+  const handleDecrease = () => {
+    if (item.quantity > 1) {
+      onQuantityChange(item.id, item.quantity - 1);
+    } else {
+      onQuantityChange(item.id, 0); // triggers removal
+    }
+  };
+
+  const handleIncrease = () => {
+    onQuantityChange(item.id, item.quantity + 1);
+  };
+
   return (
     <div className='w-full max-w-full'>
       <div className='grid grid-cols-[120px_1fr] md:grid-cols-[130px_1fr] gap-3 p-2'>
-        {/* Image Container */}
+        {/* Image */}
         <div className='flex-shrink-0'>
-          <div className='w-full aspect-square bg-gray-100 rounded-lg overflow-hidden'>
-            <img 
-              className="w-full h-full object-cover" 
-              src={products.product_1}
-              alt="Gradient Graphic T-shirt"
+          <div className='w-full overflow-hidden bg-gray-100 rounded-lg aspect-square'>
+            <img
+              className="object-cover w-full h-full"
+              src={item.image}
+              alt={item.name}
             />
           </div>
         </div>
 
-        {/* Content Container */}
-        <div className='min-w-0 flex flex-col justify-between'>
+        {/* Content */}
+        <div className='flex flex-col justify-between min-w-0'>
           <div className='space-y-2'>
-            <h3 className='text-lg md:text-xl font-medium truncate'>
-              Gradient Graphic T-shirt
-            </h3>
-            <div className='text-sm space-y-1'>
-              <p className='flex'>
-                Size: <span className='text-gray-500 ml-1'>Large</span>
-              </p>
-              <p className='flex'>
-                Color: <span className='text-gray-500 ml-1'>White</span>
-              </p>
+            <h3 className='text-lg font-medium truncate md:text-xl'>{item.name}</h3>
+            <div className='space-y-1 text-sm'>
+              <p className='flex'>Size: <span className='ml-1 text-gray-500'>{item.size}</span></p>
+              <p className='flex'>Color: <span className='ml-1 text-gray-500'>{item.color}</span></p>
             </div>
           </div>
 
-          <div className='flex justify-between items-center mt-3'>
-            <h2 className='font-bold text-xl md:text-2xl'>$145</h2>
+          <div className='flex items-center justify-between mt-3'>
+            <h2 className='text-xl font-bold md:text-2xl'>${item.price}</h2>
             <div className='flex items-center gap-3 px-3 py-1 bg-gray-100 rounded-full'>
-              <button className='w-6 h-6 flex items-center justify-center'>-</button>
-              <span className='min-w-[20px] text-center'>1</span>
-              <button className='w-6 h-6 flex items-center justify-center'>+</button>
+              <button className='flex items-center justify-center w-6 h-6' onClick={handleDecrease}>-</button>
+              <span className='min-w-[20px] text-center'>{item.quantity}</span>
+              <button className='flex items-center justify-center w-6 h-6' onClick={handleIncrease}>+</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default CartItemCard
