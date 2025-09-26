@@ -35,7 +35,7 @@ const Footer = () => {
         </div>
 
         {/* Main Footer Content */}
-        <div className='px-4 pt-24 pb-8 bg-gray-100 lg:pt-28 lg:px-16'>
+        <div className='px-4 pb-8 bg-gray-100 pt-34 lg:pt-28 lg:px-16'>
           {/* Footer Links Section */}
           <div className='flex flex-col mb-8 lg:flex-row lg:justify-between'>
             {/* Company Info */}

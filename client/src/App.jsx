@@ -12,6 +12,8 @@ import OnSale from './pages/OnSale'
 import BrandPage from './pages/BrandPage'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
+import SuccessPage from './pages/SuccessPage'
+import OrdersPage from './pages/OrdersPage'
 
 const App = () => {
   return (
@@ -30,6 +32,9 @@ const App = () => {
         <Route path='/shop' element={<Shop />} />
         <Route path='/OnSale' element={<OnSale />} />
         <Route path='/Brands' element={<BrandPage />}/>
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+
 
 
       </Routes>

@@ -1,28 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, Search, ShoppingBag, X } from 'lucide-react';
+import { Menu, Search, ShoppingBag, X, User } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, SetIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const navigate = useNavigate();
+  const userMenuRef = useRef();
 
   useEffect(() => {
-  const checkLogin = () => {
-    const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token);
-  };
+    const checkLogin = () => {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
 
-  checkLogin(); // initial check
+    checkLogin();
+    window.addEventListener('storage', checkLogin);
 
-  window.addEventListener('storage', checkLogin); // listen for login/logout
+    return () => {
+      window.removeEventListener('storage', checkLogin);
+    };
+  }, []);
 
-  return () => {
-    window.removeEventListener('storage', checkLogin);
-  };
-}, []);
-
-  const handleClose = () => SetIsOpen(false);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setShowUserMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -31,6 +40,8 @@ const Navbar = () => {
     setIsLoggedIn(false);
     navigate('/login');
   };
+
+  const handleClose = () => SetIsOpen(false);
 
   return (
     <div className='sticky top-0 z-50 w-full h-[50px] md:h-[80px] bg-white border'>
@@ -43,10 +54,7 @@ const Navbar = () => {
 
             {isOpen && (
               <>
-                <div
-                  className="fixed inset-0 z-40 bg-white opacity-60"
-                  onClick={handleClose}
-                />
+                <div className="fixed inset-0 z-40 bg-white opacity-60" onClick={handleClose} />
                 <div className='fixed top-0 left-0 z-50 flex flex-col w-64 h-full gap-4 p-6 bg-white shadow-lg animate-slideIn'>
                   <button onClick={handleClose} className="self-end mb-4" aria-label="Close menu">
                     <X size={24} />
@@ -63,15 +71,38 @@ const Navbar = () => {
                       </button>
                     </Link>
                   ) : (
-                    <button
-                      className='mt-4 w-full border px-4 py-2 bg-red-600 text-white rounded-[10px] cursor-pointer'
-                      onClick={() => {
-                        handleLogout();
-                        handleClose();
-                      }}
-                    >
-                      Logout
-                    </button>
+                    <div ref={userMenuRef} className='relative'>
+                      <button
+                        className='mt-4 w-full border px-4 py-2 bg-black text-white rounded-[10px] cursor-pointer'
+                        onClick={() => setShowUserMenu(!showUserMenu)}
+                      >
+                        <User />
+                      </button>
+                      {showUserMenu && (
+                        <div className='absolute left-0 w-40 mt-2 bg-white border rounded shadow-lg'>
+                          <button
+                            className='w-full px-4 py-2 text-left hover:bg-gray-100'
+                            onClick={() => {
+                              navigate('/orders');
+                              setShowUserMenu(false);
+                              handleClose();
+                            }}
+                          >
+                            My Orders
+                          </button>
+                          <button
+                            className='w-full px-4 py-2 text-left text-red-600 hover:bg-gray-100'
+                            onClick={() => {
+                              handleLogout();
+                              setShowUserMenu(false);
+                              handleClose();
+                            }}
+                          >
+                            Logout
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
               </>
@@ -85,10 +116,10 @@ const Navbar = () => {
 
           {/* Desktop Links */}
           <div className="hidden gap-5 lg:flex">
-            <Link to="/Shop" className='text-gray-500 transition-colors duration-200 hover:text-black hover:underline'>Shop</Link>
-            <Link to="/OnSale" className='text-gray-500 transition-colors duration-200 hover:text-black hover:underline'>On sale</Link>
-            <Link to="/New-Arrivals" className='text-gray-500 transition-colors duration-200 hover:text-black hover:underline'>New Arrivals</Link>
-            <Link to="/Brands" className='text-gray-500 transition-colors duration-200 hover:text-black hover:underline'>Brands</Link>
+            <Link to="/Shop" className='text-gray-500 hover:text-black hover:underline'>Shop</Link>
+            <Link to="/OnSale" className='text-gray-500 hover:text-black hover:underline'>On sale</Link>
+            <Link to="/New-Arrivals" className='text-gray-500 hover:text-black hover:underline'>New Arrivals</Link>
+            <Link to="/Brands" className='text-gray-500 hover:text-black hover:underline'>Brands</Link>
           </div>
         </div>
 
@@ -98,18 +129,42 @@ const Navbar = () => {
           <div className='hidden md:flex'>
             <input type="text" placeholder='Search' className='w-80 h-10 rounded-[20px] border bg-gray-300 text-black pl-3' />
           </div>
-          <Link to="/cart"><div><ShoppingBag /></div></Link>
+          <Link to="/cart"><ShoppingBag /></Link>
           {!isLoggedIn ? (
             <Link to="/login">
               <button className='border px-4 py-2 bg-black text-white rounded-[10px] cursor-pointer'>Login</button>
             </Link>
           ) : (
-            <button
-              className='border px-4 py-2 bg-red-600 text-white rounded-[10px] cursor-pointer'
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
+            <div ref={userMenuRef} className='relative'>
+              <button
+                className='border px-4 py-2 bg-black text-white rounded-[10px] cursor-pointer'
+                onClick={() => setShowUserMenu(!showUserMenu)}
+              >
+                <User />
+              </button>
+              {showUserMenu && (
+                <div className='absolute right-0 w-40 mt-2 bg-white border rounded shadow-lg'>
+                  <button
+                    className='w-full px-4 py-2 text-left hover:bg-gray-100'
+                    onClick={() => {
+                      navigate('/orders');
+                      setShowUserMenu(false);
+                    }}
+                  >
+                    My Orders
+                  </button>
+                  <button
+                    className='w-full px-4 py-2 text-left text-red-600 hover:bg-gray-100'
+                    onClick={() => {
+                      handleLogout();
+                      setShowUserMenu(false);
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>

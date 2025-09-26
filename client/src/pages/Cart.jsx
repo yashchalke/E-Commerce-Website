@@ -31,6 +31,28 @@ const Cart = () => {
     calculateSubtotal(updatedCart);
   };
 
+  const handleCheckout = async () => {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('userId');
+
+  try {
+    const res = await fetch('http://localhost:3000/Api/Payment/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ cartItems: cart, userId }),
+    });
+
+    const data = await res.json();
+    window.location.href = data.url; // Redirect to Stripe
+  } catch (err) {
+    console.error('Checkout error:', err);
+  }
+};
+
   return (
     <div className='px-5 py-5 md:px-12 md:py-5'>
       <h1 className='mb-5 text-2xl font-extrabold md:text-4xl'>YOUR CART</h1>
@@ -95,7 +117,9 @@ const Cart = () => {
               </div>
 
               {/* Checkout Button */}
-              <button className='w-full py-3 mt-4 text-sm font-medium text-white transition-colors bg-black rounded-full hover:bg-gray-800'>
+              <button className='w-full py-3 mt-4 text-sm font-medium text-white transition-colors bg-black rounded-full hover:bg-gray-800'
+              onClick={handleCheckout}
+              >
                 Go to Checkout
               </button>
             </div>

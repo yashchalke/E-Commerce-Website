@@ -42,7 +42,7 @@ const Login = () => {
 
   const fetchCartFromDB = async (userId, token) => {
   try {
-    const res = await fetch(`http://localhost:3000/Api/Cart/${userId}`, {
+    const res = await fetch(`https://r7cs0v6v-3000.inc1.devtunnels.ms/Api/Cart/${userId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },

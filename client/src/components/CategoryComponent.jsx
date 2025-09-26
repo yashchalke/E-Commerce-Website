@@ -42,6 +42,8 @@ const CategoryComponent = ({CategoryType}) => {
     if(error){
       return (<p>Failed to Fetch: {error}</p>)
     }
+
+    
   return (
     <div className='px-4 py-2 md:px-10 md:py-10'>
         <div className='md:grid lg:grid-cols-[20%_80%] gap-10'>
@@ -154,7 +156,7 @@ const CategoryComponent = ({CategoryType}) => {
                     <p className='hidden md:block'>Sort by:Most Popular</p>
                 </div>
             </div> 
-                <div className='flex flex-wrap gap-5 py-5 md:px-17 md:py-4 md:flex md:flex-wrap md:gap-5'>
+                <div className='flex flex-wrap justify-center gap-2 py-2 md:justify-start md:px-17 md:py-4 md:flex md:flex-wrap md:gap-10'>
                     {products.map((product) => (
                     <div className="w-[160px] md:w-auto " key={product._id}>
                         <ProductCard 

@@ -1,40 +1,65 @@
 const Product = require('../db/Models/Product')
 const Cart = require('../db/Models/Cart')
 
-const NewProductController = async (req,res) =>{
-    try{
-        const {productname,productimg,price,desc} = req.body;
-        const productexist = await Product.findOne({productname});
-        if(productexist){
-            res.status(400).json({
-                Success : false,
-                message : "Product Already Exist"
-            });
-        }
-        const newProduct = new Product({
-            productname:productname,
-            productimg:productimg,
-            price:price,
-            desc:desc
-        });
+const NewProductController = async (req, res) => {
+  try {
+    const {
+      productname,
+      productimg,
+      price,
+      desc,
+      category,
+      color,
+      size,
+      style
+    } = req.body;
 
-        await newProduct.save();
+    // Check for missing required fields
+    if (!productname || !productimg || !price || !desc || !category || !color || !size || !style) {
+      return res.status(400).json({
+        Success: false,
+        message: "All fields are required: productname, productimg, price, desc, category, color, size, style"
+      });
+    }
 
-        
-        return res.status(201).json({
-                Success : true,
-                message : "New Product Added SuccessFully!!",
-                Data : newProduct
-            });
+    // Check if product already exists
+    const productexist = await Product.findOne({ productname });
+    if (productexist) {
+      return res.status(400).json({
+        Success: false,
+        message: "Product Already Exists"
+      });
     }
-    catch(err){
-        console.log("Error Occured while adding a new product",err);
-        res.status(400).json({
-                Success : false,
-                message : "Something went Wrong!!!!"
-            });
-    }
-}
+
+    // Create new product
+    const newProduct = new Product({
+      productname,
+      productimg,
+      price,
+      desc,
+      category,
+      color,
+      size,
+      style
+    });
+
+    await newProduct.save();
+
+    return res.status(201).json({
+      Success: true,
+      message: "New Product Added Successfully!",
+      Data: newProduct
+    });
+
+  } catch (err) {
+    console.log("Error Occurred while adding a new product", err);
+    res.status(500).json({
+      Success: false,
+      message: "Internal Server Error",
+      error: err.message
+    });
+  }
+};
 
 const GetProductController = async (req,res)=>{
     try{
