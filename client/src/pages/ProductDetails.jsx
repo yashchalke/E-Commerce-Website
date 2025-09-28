@@ -14,9 +14,9 @@ const ProductDetails = () => {
   const {id} = useParams();
   const [product,setproduct] = useState(null);
   const [loading,setloading] = useState(true);
-  const [selectedColor, setSelectedColor] = useState(null); //edited
-  const [selectedSize, setSelectedSize] = useState(null); //edited
-  const [quantity, setQuantity] = useState(1); // edited
+  const [selectedColor, setSelectedColor] = useState(null); 
+  const [selectedSize, setSelectedSize] = useState(null); 
+  const [quantity, setQuantity] = useState(1); 
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const userId = localStorage.getItem('userId'); 
@@ -46,7 +46,7 @@ const ProductDetails = () => {
 
   const syncCartWithBackend = async (updatedCart) => {
 
-  console.log('Syncing cart for user:', userId); // ✅ Debug log
+  console.log('Syncing cart for user:', userId); 
 
   try {
     const res = await fetch('http://localhost:3000/Api/Cart/save', {
@@ -59,7 +59,7 @@ const ProductDetails = () => {
     });
 
     const data = await res.json();
-    console.log('Backend response:', data); // ✅ Debug log
+    console.log('Backend response:', data); 
   } catch (err) {
     console.error('Cart sync failed:', err);
   }
@@ -92,7 +92,7 @@ const handleAddToCart = () => {
   existingCart.push(cartItem);
   localStorage.setItem('cart', JSON.stringify(existingCart));
 
-  // 🔄 Sync with backend
+  
   syncCartWithBackend(existingCart);
 
   toast.success('Item added to cart successfully!');
@@ -130,8 +130,8 @@ const handleAddToCart = () => {
             <p className='text-2xl'>{product.price}</p>
             <p className='font-extralight'>{product.description}</p>
           </div>
-          <div className='my-5 border border-gray-400'></div> {/*line*/}
-          <div className=''> {/*colors*/}
+          <div className='my-5 border border-gray-400'></div> 
+          <div className=''> 
             Select Colors
             <div className='grid grid-cols-[40px_40px_40px] h-10 gap-2 mt-2'>
               {['amber-500', 'violet-400', 'blue-300'].map((color)=>(
@@ -145,8 +145,8 @@ const handleAddToCart = () => {
               ))}
             </div>
             </div> 
-          <div className='my-5 border border-gray-400'></div> {/*line*/}
-          <div> {/*Choose size div*/}
+          <div className='my-5 border border-gray-400'></div> 
+          <div> 
             choose size
             <div className='md:h-10 m-2 md:grid md:grid-cols-[20%_20%_20%_20%] md:gap-5 gap-2 flex '>
                 {['Small','Medium','Large','X-Large'].map((Size)=>(
@@ -160,7 +160,7 @@ const handleAddToCart = () => {
                 ))}
             </div>
             </div> 
-          <div className='my-5 border border-gray-400'></div> {/*line*/}
+          <div className='my-5 border border-gray-400'></div> 
           <div className='grid grid-cols-[20%_70%] gap-5 h-10'>
             <div className='flex items-center justify-between w-full px-2 border rounded-3xl'>
             <div className='cursor-pointer' onClick={() => setQuantity((q) => Math.max(1, q - 1))}>-</div>
@@ -175,7 +175,7 @@ const handleAddToCart = () => {
         </div>
       </div>
       <ProductTabs />
-      <NewArrivals /> {/*Photos are not visible on this page */}
+      <NewArrivals /> 
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   )
