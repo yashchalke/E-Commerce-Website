@@ -51,8 +51,8 @@ if (error) {
           <ProductCard
             key={p._id}                 
             id={p._id}
-            productname={p.productname}
-            productimage={p.productimg.main}
+            productname={p.name}
+            productimage={p.image}
             price={p.price}
           />
         ))}

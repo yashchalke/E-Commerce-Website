@@ -1,63 +1,34 @@
 const Product = require('../db/Models/Product')
-const Cart = require('../db/Models/Cart')
+const Cart = require('../db/Models/Cart');
 
 const NewProductController = async (req, res) => {
-  try {
-    const {
-      productname,
-      productimg,
-      price,
-      desc,
+   try {
+    const { name, category, size, colors, price, image, description, inStock } = req.body
+
+    const newproduct = new Product({
+      name,
       category,
-      color,
       size,
-      style
-    } = req.body;
-
-    // Check for missing required fields
-    if (!productname || !productimg || !price || !desc || !category || !color || !size || !style) {
-      return res.status(400).json({
-        Success: false,
-        message: "All fields are required: productname, productimg, price, desc, category, color, size, style"
-      });
-    }
-
-    // Check if product already exists
-    const productexist = await Product.findOne({ productname });
-    if (productexist) {
-      return res.status(400).json({
-        Success: false,
-        message: "Product Already Exists"
-      });
-    }
-
-    // Create new product
-    const newProduct = new Product({
-      productname,
-      productimg,
+      colors,
       price,
-      desc,
-      category,
-      color,
-      size,
-      style
-    });
+      image,
+      description,
+      inStock,
+    })
 
-    await newProduct.save();
+    await newproduct.save()
 
-    return res.status(201).json({
-      Success: true,
-      message: "New Product Added Successfully!",
-      Data: newProduct
-    });
-
+    res.status(201).json({
+      success: true,
+      message: 'Product Added Successfully',
+      data: newproduct,
+    })
   } catch (err) {
-    console.log("Error Occurred while adding a new product", err);
-    res.status(500).json({
-      Success: false,
-      message: "Internal Server Error",
-      error: err.message
-    });
+    console.log('Error occurred while creating new product:', err)
+    res.status(400).json({
+      success: false,
+      message: 'Failed to add product',
+    })
   }
 };
 
@@ -157,5 +128,67 @@ const GetproductbyId = async(req,res) =>{
     }
 }
 
+const FilterController = async(req,res) =>{
+     try {
+    const { category, size, colors, price } = req.body
+    const query = []
 
-module.exports = {NewProductController,GetProductController,NewArrivalsController,TopSellingController,GetproductbyId};
+    if (category && category.length > 0) {
+      query.push({ category: { $in: category } })
+    }
+
+    if (size && size.length > 0) {
+      query.push({ size: { $in: size } })
+    }
+
+    if (colors && colors.length > 0) {
+      query.push({ colors: { $in: colors } })
+    }
+
+    let priceArray = []
+    if (Array.isArray(price)) {
+      priceArray = price
+    } else if (typeof price === 'string') {
+      priceArray = [price]
+    }
+
+    if (priceArray.length > 0) {
+      const priceConditions = []
+
+      priceArray.forEach((range) => {
+        switch (range) {
+          case 'under-500':
+            priceConditions.push({ price: { $lt: 500 } })
+            break
+          case '500-2000':
+            priceConditions.push({ price: { $gte: 500, $lte: 2000 } })
+            break
+          case '2000-5000':
+            priceConditions.push({ price: { $gte: 2000, $lte: 5000 } })
+            break
+          case 'above-5000':
+            priceConditions.push({ price: { $gt: 5000 } })
+            break
+        }
+      })
+
+      query.push({ $or: priceConditions })
+    }
+
+    const products = await Product.find({ $and: query })
+    res.status(200).json({
+      success: true,
+      message: 'Filtered products fetched successfully',
+      data: products
+    })
+  } catch (err) {
+    console.log('Error filtering products:', err)
+    res.status(500).json({
+      success: false,
+      message: 'Error filtering products'
+    })
+  }
+}
+
+
+module.exports = {NewProductController,GetProductController,NewArrivalsController,TopSellingController,GetproductbyId,FilterController};

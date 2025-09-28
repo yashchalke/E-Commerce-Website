@@ -17,6 +17,9 @@ const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState(null); //edited
   const [selectedSize, setSelectedSize] = useState(null); //edited
   const [quantity, setQuantity] = useState(1); // edited
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('userId'); 
   
   useEffect(()=>{
     window.scrollTo(0,0);
@@ -42,8 +45,6 @@ const ProductDetails = () => {
   },[id]);
 
   const syncCartWithBackend = async (updatedCart) => {
-  const token = localStorage.getItem('token');
-  const userId = localStorage.getItem('userId'); // Must be set
 
   console.log('Syncing cart for user:', userId); // ✅ Debug log
 
@@ -64,17 +65,24 @@ const ProductDetails = () => {
   }
 };
 
+
 const handleAddToCart = () => {
+  if (!token || !userId) {
+    toast.info('Please login to add items to your cart.');
+    navigate('/login');
+    return;
+  }
+  
   if (!selectedColor || !selectedSize || quantity < 1) {
-    alert('Please select color, size, and quantity');
+    toast.error('Please select color, size, and quantity');
     return;
   }
 
   const cartItem = {
     id: product._id,
-    name: product.productname,
+    name: product.name,
     price: product.price,
-    image: product.productimg.main,
+    image: product.image,
     color: selectedColor,
     size: selectedSize,
     quantity,
@@ -97,7 +105,7 @@ const handleAddToCart = () => {
   return (
     <div className='md:px-10 md:py-10'>
       <div className='justify-between md:flex'>
-        <div className=' md:min-w-[49%] md:h-fit grid grid-cols-[25%_65%] gap-3 px-3 py-3 border'>
+        <div className=' md:min-w-[49%] md:h-fit grid grid-cols-[25%_65%] gap-3 px-3 py-3 '>
           <div className='grid grid-rows-3 gap-3'>
             <div className='overflow-hidden border rounded-2xl h-fit'>
               <img src={products.product_1} className=''/>
@@ -110,7 +118,7 @@ const handleAddToCart = () => {
             </div>
             </div>
             <div className='col-span-2 col-start-2 row-span-3 row-start-1 overflow-hidden border rounded-2xl h-fit'>
-              <img src={product.productimg.main} className='' />
+              <img src={product.image} className='' />
             </div>
             
         </div>
@@ -118,9 +126,9 @@ const handleAddToCart = () => {
       
         <div className='md:min-w-[49%] md:h-auto px-5 py-5'>
           <div className='flex flex-col gap-y-2'>
-            <h1 className='text-4xl font-bold'>{product.productname}</h1>
+            <h1 className='text-4xl font-bold'>{product.name}</h1>
             <p className='text-2xl'>{product.price}</p>
-            <p className='font-extralight'>{product.desc}</p>
+            <p className='font-extralight'>{product.description}</p>
           </div>
           <div className='my-5 border border-gray-400'></div> {/*line*/}
           <div className=''> {/*colors*/}

@@ -49,8 +49,8 @@ const TopSelling = () => {
               <ProductCard 
               key={product._id}
               id={product._id}
-              productimage={product.productimg.main}
-              productname={product.productname}
+              productimage={product.image}
+              productname={product.name}
               price={product.price}
               />
             ))}

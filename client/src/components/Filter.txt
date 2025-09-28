@@ -1,0 +1,90 @@
+import React, { useState } from 'react';
+import { FilterIcon } from 'lucide-react';
+import { RangeSlider } from 'react-range-slider-input';
+
+const Filters = () => {
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+
+  return (
+    <div className='border min-w-70'>
+      {/* Header */}
+      <div className='flex justify-between px-4 py-4 border-b-2'>
+        <h1 className='text-xl font-semibold'>Filters</h1>
+        <FilterIcon />
+      </div>
+
+      {/* Category */}
+      <div className='flex flex-col px-4 py-4 mb-2 text-gray-500 border-b-2 gap-y-2'>
+        {['Tshirt', 'Shorts', 'Shirts', 'Hoodie', 'Jeans'].map((item, idx) => (
+          <label key={idx} htmlFor={`cat-${item}`}>
+            <input type='checkbox' id={`cat-${item}`} value={item} /> {item}
+          </label>
+        ))}
+      </div>
+
+      {/* Price */}
+      <div className='px-4 py-4 border-b-2'>
+        <h1 className='mb-2 text-xl font-semibold'>Price</h1>
+        <div className="flex items-center gap-2 mb-4">
+          <span className="px-3 py-1 text-sm bg-gray-200 rounded">${priceRange[0]}</span>
+          <RangeSlider
+            min={0}
+            max={1000}
+            step={10}
+            value={priceRange}
+            onInput={setPriceRange}
+            className="w-full"
+          />
+          <span className="px-3 py-1 text-sm bg-gray-200 rounded">${priceRange[1]}</span>
+        </div>
+        <div className="text-sm text-center text-gray-600">
+          Price: ${priceRange[0]} - ${priceRange[1]}
+        </div>
+      </div>
+
+      {/* Colors */}
+      <div className='px-4 py-4 border-b-2'>
+        <h1 className='text-xl font-semibold'>Colors</h1>
+        <div className='grid grid-cols-5 grid-rows-2 gap-5 mt-2'>
+          {[
+            'black', 'red-600', 'yellow-300', 'orange-400', 'blue-400',
+            'blue-700', 'purple-600', 'pink-400', 'white'
+          ].map((color, idx) => (
+            <div key={idx} className='w-8 h-8 border rounded-full' style={{ backgroundColor: `var(--tw-bg-opacity, 1)`, background: `var(--tw-bg-${color})` }}></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Size */}
+      <div className='px-4 py-4 border-b-2'>
+        <h1 className='text-xl font-semibold'>Size</h1>
+        <div className='flex flex-wrap py-2 text-gray-500 gap-x-4'>
+          {['XX-Small', 'X-Small', 'Small', 'Medium', 'X-Large', 'XX-Large', '3X-Large', '4X-Large'].map((size, idx) => (
+            <label key={idx} htmlFor={`size-${size}`}>
+              <input type='checkbox' id={`size-${size}`} value={size} /> {size}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Dress Style */}
+      <div className='px-4 py-4'>
+        <h1 className='text-xl font-semibold'>Dress Style</h1>
+        <div className='flex flex-col mt-2 text-gray-500 gap-y-2'>
+          {['Casual', 'Formal', 'Party', 'Gym'].map((style, idx) => (
+            <label key={idx} htmlFor={`style-${style}`}>
+              <input type='checkbox' id={`style-${style}`} value={style} /> {style}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Apply Button */}
+      <div className='px-4 py-4'>
+        <button className='w-full py-2 text-white bg-black border rounded-3xl'>Apply Filter</button>
+      </div>
+    </div>
+  );
+};
+
+export default Filters

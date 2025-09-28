@@ -1,71 +1,43 @@
 const mongoose = require('mongoose');
 
-const ProductSchema = new mongoose.Schema({
-  productname: {
+const productSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
   },
-  productimg: {
-    main: { type: String, trim: true, unique:false},
-    gallery: [{ type: String, trim: true, unique:false}],
+  category: {
+    type: String,
+    enum: ['shirts', 't-shirts', 'jeans', 'shorts'],
+    required: true,
+  },
+  size: {
+    type: [String], // allows multiple sizes per product
+    enum: ['small', 'medium', 'large', 'x-large'],
+    default: [],
+  },
+  colors: {
+    type: [String], // allows multiple color options
+    enum: ['black', 'white', 'yellow', 'purple', 'blue', 'green', 'red', 'pink'],
+    default: [],
   },
   price: {
     type: Number,
     required: true,
   },
-  desc: {
+  image: {
+    type: String, // URL or path to product image
+  },
+  description: {
     type: String,
-    required: true,
   },
-  category: {
-    type: String, // e.g., "Tshirt", "Jeans"
-    required: true,
+  inStock: {
+    type: Boolean,
+    default: true,
   },
-  color: {
-    type: String, // e.g., "black", "red"
-    required: true,
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
-  size: {
-    type: String, // e.g., "Medium", "X-Large"
-    required: true,
-  },
-  style: {
-    type: String, // e.g., "Casual", "Formal"
-    required: true,
-  },
-}, { timestamps: true });
+});
 
-module.exports = mongoose.model("Product", ProductSchema);
-
-
-
-
-// const mongoose = require('mongoose');
-
-// const ProductSchema = new mongoose.Schema({
-//     productname : {
-//         type:String,
-//         unique:false,
-//         Required:true
-//     },
-//     productimg : {
-//         main : {
-//             type:String,
-//             trim:true
-//         },
-//         gallery: [{
-//             type:String,
-//             trim:true
-//         }]
-//     },
-//     price : {
-//         type:Number,
-//         Required:true
-//     },
-//     desc : {
-//         type:String,
-//         Required:true
-//     }
-// },{timestamps:true});
-
-// module.exports = mongoose.model("Product",ProductSchema);
+module.exports = mongoose.model('Products',productSchema);
