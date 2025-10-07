@@ -23,7 +23,7 @@ const RegisterUser = async (req,res)=>{
             });
 
             await newUser.save();
-            const payload = {UserId: {id: newUser._id}};
+            const payload = {UserId: {id: newUser._id},role:newUser.role};
             const token = jwt.sign(payload, process.env.JWT_SECRET , {expiresIn:"1d"});
                           
             if(newUser){
@@ -72,7 +72,7 @@ const LoginUser = async (req,res)=>{
         });
     }
     else{
-        const payload = {userId: {id:checkuser._id}};
+        const payload = {userId: {id:checkuser._id},role:checkuser.role};
         const token = await jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:"1d"});
          res.status(200).json({
             Success : true,

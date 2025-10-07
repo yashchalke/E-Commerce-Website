@@ -6,8 +6,18 @@ const Navbar = () => {
   const [isOpen, SetIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [query, setquery] = useState('');
   const navigate = useNavigate();
   const userMenuRef = useRef();
+
+  const searchItem = () => {
+    const trimmed = query.trim();
+    navigate(`/shop?search=${encodeURIComponent(trimmed.trim())}`);
+  }
+
+  const handleinputchange = (e) => {
+    setquery(e.target.value);
+  }
 
   useEffect(() => {
     const checkLogin = () => {
@@ -126,9 +136,14 @@ const Navbar = () => {
         {/* Right Section */}
         <div className='flex items-center gap-6'>
           <div className='md:hidden'><Search /></div>
-          <div className='hidden md:flex'>
-            <input type="text" placeholder='Search' className='w-80 h-10 rounded-[20px] border bg-gray-300 text-black pl-3' />
+
+          {/* Search Bar */}
+          <div className='hidden md:flex rounded-[20px] bg-gray-300 '>
+            <input type="text" value={query} onChange={handleinputchange} placeholder='Search' className='h-10 p-3 text-black outline-none w-80' />
+            <button className='pr-3 cursor-pointer hover:scale-110' onClick={searchItem}><Search /></button>
           </div>
+
+          {/* Add to cart */}
           <Link to="/cart"><ShoppingBag /></Link>
           {!isLoggedIn ? (
             <Link to="/login">

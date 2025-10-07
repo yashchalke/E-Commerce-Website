@@ -26,11 +26,17 @@ const Login = () => {
         toast.success('Login was successful!');
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.details._id); // ✅ Store userId for cart sync
+        localStorage.setItem('role', data.details.role);
+
         window.dispatchEvent(new Event('storage'));
 
         await fetchCartFromDB(data.details._id, data.token);
         
+        if (data.details.role === 'admin') {
+        navigate('/Admin');
+      } else {
         navigate('/');
+      }
       } else {
         toast.error(data.message || 'Login failed');
       }

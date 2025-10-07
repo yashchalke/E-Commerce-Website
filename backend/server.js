@@ -5,6 +5,8 @@ const Auth_router = require("./routes/AuthRoutes");
 const Product_router = require('./routes/ProductRoutes');
 const Cart_router = require('./routes/cart');
 const Payment_router = require('./routes/PaymentRoutes');
+const AdminRoutes = require('./routes/AdminRoutes');
+
 
 const cors = require('cors');
 
@@ -21,6 +23,8 @@ app.use('/Api/Auth',Auth_router);
 app.use('/Api/Product',Product_router);
 app.use('/Api/Cart',Cart_router);
 app.use('/Api/Payment', Payment_router);
+app.use('/Api/Admin', AdminRoutes);
+
 
 
 app.listen(PORT , ()=>{

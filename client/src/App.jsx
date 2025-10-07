@@ -14,6 +14,8 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import SuccessPage from './pages/SuccessPage'
 import OrdersPage from './pages/OrdersPage'
+import AdminRoute from './components/AdminRoute'
+import AdminPanel from './pages/AdminPanel'
 
 const App = () => {
   return (
@@ -25,6 +27,14 @@ const App = () => {
 
         <Route path='/' element={<Home />}/>
         <Route path='/login' element={<Login />} />
+        <Route
+          path="/Admin"
+          element={
+            <AdminRoute>
+              <AdminPanel />
+            </AdminRoute>
+          }
+        />
         <Route path='/SignUp' element={<SignUp />} />
         <Route path='/cart' element={<Cart />}/>
         <Route path='/product/:id' element={<ProductDetails />} />
