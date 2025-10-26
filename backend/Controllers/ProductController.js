@@ -1,5 +1,6 @@
 const Product = require('../db/Models/Product')
 const Cart = require('../db/Models/Cart');
+const Order = require('../db/Models/Order')
 
 const NewProductController = async (req, res) => {
    try {
@@ -46,6 +47,32 @@ const GetProductController = async (req,res)=>{
                 Success : true,
                 message : "Products Fetched Successfully",
                 Data : products
+            });
+        }
+
+    }catch(err){
+        console.log("Something Went Wrong" , err);
+        res.status(404).json({
+                Success : false,
+                message : "Something went wrong!!!"
+            });
+    }
+}
+
+const GetOrdersController = async (req,res)=>{
+    try{
+        const orders = await Order.find({});
+        if(orders.length === 0){
+            res.status(404).json({
+                Success : false,
+                message : "There are no Orders"
+            });
+        }
+        else{
+            res.status(200).json({
+                Success : true,
+                message : "Orders Fetched Successfully",
+                Data : orders
             });
         }
 
@@ -191,4 +218,4 @@ const FilterController = async(req,res) =>{
 }
 
 
-module.exports = {NewProductController,GetProductController,NewArrivalsController,TopSellingController,GetproductbyId,FilterController};
+module.exports = {NewProductController,GetProductController,NewArrivalsController,TopSellingController,GetproductbyId,FilterController,GetOrdersController};

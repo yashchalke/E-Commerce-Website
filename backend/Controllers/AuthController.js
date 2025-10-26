@@ -72,7 +72,7 @@ const LoginUser = async (req,res)=>{
         });
     }
     else{
-        const payload = {userId: {id:checkuser._id},role:checkuser.role};
+        const payload = {userId: {id:checkuser._id},role:checkuser.role,username:checkuser.username};
         const token = await jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:"1d"});
          res.status(200).json({
             Success : true,

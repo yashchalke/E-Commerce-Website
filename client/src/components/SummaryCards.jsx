@@ -31,19 +31,24 @@ const SummaryCards = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 gap-6 mb-10 md:grid-cols-3">
-      <div className="p-4 bg-white rounded shadow">
-        <h2 className="text-lg font-semibold">Total Sales</h2>
+    <div className="grid grid-cols-1 gap-6 mt-4 mb-4 md:grid-cols-4 h-50">
+      <div className="p-4 bg-black shadow rounded-xl">
+        <h2 className="text-lg font-semibold">Total Revenue</h2>
         <p className="text-3xl font-bold">₹{stats.totalSales}</p>
       </div>
-      <div className="p-4 bg-white rounded shadow">
-        <h2 className="text-lg font-semibold">Orders</h2>
+      <div className="p-4 bg-black shadow rounded-xl">
+        <h2 className="text-lg font-semibold">Net Profit</h2>
+        <p className="text-3xl font-bold">₹{stats.totalSales}</p>
+      </div>
+      <div className="p-4 bg-black shadow rounded-xl">
+        <h2 className="text-lg font-semibold">Lifetime Orders</h2>
         <p className="text-3xl font-bold">{stats.totalOrders}</p>
       </div>
-      <div className="p-4 bg-white rounded shadow">
+      <div className="p-4 bg-black shadow rounded-xl">
         <h2 className="text-lg font-semibold">Products</h2>
         <p className="text-3xl font-bold">{stats.totalProducts}</p>
       </div>
+       
     </div>
   );
 };

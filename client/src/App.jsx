@@ -1,5 +1,5 @@
 import React from 'react'
-import {Routes , Route} from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Blackbox from './components/Blackbox'
@@ -18,38 +18,39 @@ import AdminRoute from './components/AdminRoute'
 import AdminPanel from './pages/AdminPanel'
 
 const App = () => {
+  const location = useLocation()
+  const isAdminRoute = location.pathname.toLowerCase().startsWith('/admin');
+
   return (
     <div className='flex flex-col min-h-screen'>
-    <Blackbox />
-    <Navbar />
-    <main className='flex-grow scroll-smooth'>
-      <Routes>
+      {!isAdminRoute && <Blackbox />}
+      {!isAdminRoute && <Navbar />}
 
-        <Route path='/' element={<Home />}/>
-        <Route path='/login' element={<Login />} />
-        <Route
-          path="/Admin"
-          element={
-            <AdminRoute>
-              <AdminPanel />
-            </AdminRoute>
-          }
-        />
-        <Route path='/SignUp' element={<SignUp />} />
-        <Route path='/cart' element={<Cart />}/>
-        <Route path='/product/:id' element={<ProductDetails />} />
-        <Route path='/New-Arrivals' element={<Category />} />
-        <Route path='/shop' element={<Shop />} />
-        <Route path='/OnSale' element={<OnSale />} />
-        <Route path='/Brands' element={<BrandPage />}/>
-        <Route path="/success" element={<SuccessPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
+      <main className='flex-grow scroll-smooth'>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/New-Arrivals" element={<Category />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/OnSale" element={<OnSale />} />
+          <Route path="/Brands" element={<BrandPage />} />
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route
+            path={"/admin" || "/Admin"} 
+            element={
+              <AdminRoute>
+                <AdminPanel />
+              </AdminRoute>
+            }
+          />
+        </Routes>
+      </main>
 
-
-
-      </Routes>
-    </main>
-    <Footer/>
+      {!isAdminRoute && <Footer />}
     </div>
   )
 }
