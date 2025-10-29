@@ -4,7 +4,7 @@ const { CheckoutController } = require('../Controllers/CheckoutController');
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const Order = require("../db/Models/Order")
-const Cart = require("../db/Models/Cart")
+const Cart = require("../db/Models/Cart");
 
 router.post('/create-checkout-session', CheckoutController);
 
@@ -12,6 +12,7 @@ router.get('/session/:id', async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.retrieve(req.params.id);
     const lineItems = await stripe.checkout.sessions.listLineItems(req.params.id);
+    const cart = await Cart.findOne({userId: session.metadata.userId})
 
     const orderData = {
       userId: session.metadata.userId,
@@ -19,10 +20,11 @@ router.get('/session/:id', async (req, res) => {
       customerEmail: session.customer_details.email,
       estimatedDelivery: '3–5 business days',
       totalAmount: session.amount_total / 100,
-      items: lineItems.data.map(item => ({
-        name: item.description,
+      items: cart.items.map(item => ({
+        name: item.name,
+        category:item.category,
         quantity: item.quantity,
-        price: item.amount_subtotal / 100,
+        price: item.price,
       })),
     };
 

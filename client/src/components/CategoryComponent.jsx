@@ -56,7 +56,10 @@ const CategoryComponent = ({ CategoryType }) => {
         <div className='px-4 py-2 md:px-10 md:py-10'>
             <div className='md:grid lg:grid-cols-[20%_80%] gap-10'>
                 <div className='hidden px-2 lg:block'>
-                    <Filter setFilters={setFilters} />
+                    <div className='sticky top-24 max-h-[80vh] overflow-y-auto w-[40vh] scrollbar-hide'>
+                        <Filter setFilters={setFilters} />
+                    </div>
+
                 </div>
                 
 
@@ -97,7 +100,7 @@ const CategoryComponent = ({ CategoryType }) => {
                     <div className='flex flex-wrap justify-center gap-2 py-2 md:justify-start md:px-17 md:py-4 md:flex md:flex-wrap md:gap-10'>
 
                         {products.length > 0 ? (
-                            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
                                 {products.map((product) => (
                                     <div className="w-[160px] md:w-auto" key={product._id}>
                                         <ProductCard

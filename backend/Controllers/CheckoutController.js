@@ -1,16 +1,20 @@
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-const CheckoutController = async (req,res) => {
-    const { cartItems, userId } = req.body;
+const CheckoutController = async (req, res) => {
+  const { cartItems, userId,finalAmount } = req.body;
 
-    const line_items = cartItems.map(item => ({
+  const line_items = cartItems.map(item => ({
     price_data: {
-      currency: 'usd',
+      currency: 'inr',
       product_data: {
         name: item.name,
+        description:item.description,
+        metadata: {
+          category: item.category, // ✅ moved here
+        },
       },
-      unit_amount: Math.round(item.price * 100),
+      unit_amount: Math.round(finalAmount * 100),
     },
     quantity: item.quantity,
   }));
@@ -30,6 +34,6 @@ const CheckoutController = async (req,res) => {
     console.error('Stripe error:', err);
     res.status(500).json({ error: 'Payment session creation failed' });
   }
-}
+};
 
-module.exports = {CheckoutController}
+module.exports = { CheckoutController };

@@ -59,7 +59,10 @@ const AdminPanel = () => {
   
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-black">
-      <div className="flex flex-col w-full h-[calc(100vh-2rem)] bg-gray-200 text-white p-4 rounded-lg shadow-lg overflow-auto">
+      <div className='text-white md:hidden poppins-bold'>
+        <h1 className='text-center'>Admin Panel Not Accessible on Mobile Phones.</h1>
+      </div>
+      <div className="md:flex flex-col w-full h-[calc(100vh-2rem)] bg-gray-200 text-white p-4 rounded-lg shadow-lg overflow-auto hidden">
         <div className='flex justify-between'>
           <div>
         <h1 className="text-xl font-bold text-black ">Admin Dashboard</h1>

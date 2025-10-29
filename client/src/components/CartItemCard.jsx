@@ -39,7 +39,7 @@ const CartItemCard = ({ item, onQuantityChange }) => {
           </div>
 
           <div className='flex items-center justify-between mt-3'>
-            <h2 className='text-xl font-bold md:text-2xl'>${item.price}</h2>
+            <h2 className='text-xl font-bold md:text-2xl'>₹{item.price}</h2>
             <div className='flex items-center gap-3 px-3 py-1 bg-gray-100 rounded-full'>
               <button className='flex items-center justify-center w-6 h-6' onClick={handleDecrease}>-</button>
               <span className='min-w-[20px] text-center'>{item.quantity}</span>

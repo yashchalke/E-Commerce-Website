@@ -8,6 +8,11 @@ const cartItemSchema = new mongoose.Schema({
   color: String,
   size: String,
   quantity: Number,
+  category: {
+    type: String,
+    enum: ['shirts', 't-shirts', 'jeans', 'shorts'],
+    required: true,
+  }
 });
 
 const cartSchema = new mongoose.Schema({

@@ -6,6 +6,8 @@ const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
   const deliveryFee = 15;
   const discount = 0;
+  const finalAmount = subtotal - discount + deliveryFee;
+
 
   // Load cart items and calculate subtotal
   useEffect(() => {
@@ -43,7 +45,7 @@ const Cart = () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ cartItems: cart, userId }),
+      body: JSON.stringify({ cartItems: cart, userId ,finalAmount }),
     });
 
     const data = await res.json();
@@ -81,17 +83,17 @@ const Cart = () => {
               <div className='space-y-2'>
                 <div className='flex justify-between'>
                   <span className='font-light'>Subtotal</span>
-                  <span className='font-semibold'>${subtotal.toFixed(2)}</span>
+                  <span className='font-semibold'>₹{subtotal.toFixed(2)}</span>
                 </div>
 
                 <div className='flex justify-between'>
                   <span className='font-light'>Discount</span>
-                  <span className='font-semibold text-red-500'>-${discount.toFixed(2)}</span>
+                  <span className='font-semibold text-red-500'>₹{discount.toFixed(2)}</span>
                 </div>
 
                 <div className='flex justify-between'>
                   <span className='font-light'>Delivery Fee</span>
-                  <span className='font-semibold'>${deliveryFee.toFixed(2)}</span>
+                  <span className='font-semibold'>₹{deliveryFee.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -100,7 +102,7 @@ const Cart = () => {
               <div className='flex justify-between text-lg'>
                 <span className='font-semibold'>Total</span>
                 <span className='font-bold'>
-                  ${(subtotal - discount + deliveryFee).toFixed(2)}
+                  ₹{finalAmount.toFixed(2)}
                 </span>
               </div>
 
